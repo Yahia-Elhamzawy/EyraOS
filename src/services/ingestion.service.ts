@@ -10,7 +10,7 @@ import { RelationRepository } from '../db/repositories/relation.repo';
 
 const genAI = new GoogleGenerativeAI(CONFIG.GEMINI_API_KEY || 'MISSING_KEY');
 const extractionModel = genAI.getGenerativeModel({
-    model: 'gemini-2.5-flash',
+    model: CONFIG.GEMINI_MODEL,
     generationConfig: {
         responseMimeType: 'application/json',
         maxOutputTokens: 8192

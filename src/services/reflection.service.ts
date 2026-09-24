@@ -6,7 +6,7 @@ import { EpisodeRepository } from '../db/repositories/episode.repo';
 import { MemoryEngine } from '../core/memory.engine';
 
 const genAI = new GoogleGenerativeAI(CONFIG.GEMINI_API_KEY || 'MISSING_KEY');
-const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+const model = genAI.getGenerativeModel({ model: CONFIG.GEMINI_MODEL });
 
 export class ReflectionService {
     static async consolidateMemory(): Promise<any> {

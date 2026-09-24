@@ -6,6 +6,7 @@ dotenv.config();
 export const CONFIG = {
     PORT: parseInt(process.env.PORT || '3000', 10),
     GEMINI_API_KEY: process.env.GEMINI_API_KEY || '',
+    GEMINI_MODEL: process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite',
     DATABASE_URL: process.env.DATABASE_URL || 'postgresql://eyra_user:eyra_secure_password_2026@192.168.100.4:5434/eyraos',
     DB_HOST: process.env.DB_HOST || '192.168.100.4',
     DB_PORT: parseInt(process.env.DB_PORT || '5434', 10),
