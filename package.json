@@ -4,13 +4,28 @@
   "description": "EyraOS — Cognitive Memory & Chat System with Live Knowledge Graph",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "jest",
+    "dev:legacy": "node server.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.0",
     "cors": "^2.8.5",
     "dotenv": "^18.0.3",
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "pg": "^8.23.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^26.6.2",
+    "@types/pg": "^8.23.1",
+    "jest": "^30.5.2",
+    "ts-jest": "^29.4.13",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
   }
 }

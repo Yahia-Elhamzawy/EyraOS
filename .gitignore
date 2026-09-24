@@ -6,6 +6,10 @@
 # Dependency directories
 node_modules/
 
+# Build and Test outputs
+dist/
+coverage/
+
 # Logs
 logs
 *.log

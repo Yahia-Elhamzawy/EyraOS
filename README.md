@@ -183,6 +183,7 @@ EyraOS is architected for direct integration with physical robotic platforms:
 
 ### Prerequisites
 - Node.js (v18.0.0 or higher)
+- PostgreSQL (v15+ or pgvector/pgvector:pg16 container)
 - Google Gemini API Key
 
 ### Step-by-Step Instructions
@@ -202,18 +203,29 @@ EyraOS is architected for direct integration with physical robotic platforms:
    ```bash
    cp .env.example .env
    ```
-   Edit `.env` to supply your private Gemini API key:
+   Edit `.env` to supply your Gemini API key and PostgreSQL credentials:
    ```env
    GEMINI_API_KEY=your_gemini_api_key_here
    PORT=3000
+   DATABASE_URL=postgresql://eyra_user:your_password@localhost:5432/eyraos
    ```
 
-4. **Launch the cognitive kernel:**
+4. **Run automated test suite:**
    ```bash
+   npm test
+   ```
+
+5. **Build and launch the TypeScript kernel:**
+   ```bash
+   npm run build
    npm start
    ```
+   For local development with hot reload:
+   ```bash
+   npm run dev
+   ```
 
-5. **Access the user interface:**
+6. **Access the user interface:**
    Open [http://localhost:3000](http://localhost:3000) in any modern web browser.
 
 ---

@@ -1,0 +1,162 @@
+import { Router, Request, Response } from 'express';
+import { RetrievalEngine } from '../core/retrieval';
+import { GeminiService } from '../services/gemini.service';
+import { MemoryEngine } from '../core/memory.engine';
+import { SessionManager } from '../core/session.manager';
+import { EntityRepository } from '../db/repositories/entity.repo';
+import { RelationRepository } from '../db/repositories/relation.repo';
+import { ProcedureRepository } from '../db/repositories/procedure.repo';
+
+export const chatRouter = Router();
+
+chatRouter.post('/chat', async (req: Request, res: Response) => {
+    try {
+        const { message } = req.body;
+        if (!message || !message.trim()) {
+            return res.status(400).json({ error: 'Message is required' });
+        }
+
+        const session = await SessionManager.getActiveSession();
+        const history = (session.turns || []).map(t => ({ role: t.role, content: t.content }));
+
+        // 1. Multi-Tier Selective Retrieval
+        const retrieval = await RetrievalEngine.retrieve(message, session.working_memory || {});
+
+        // 2. AI Inference & Fact Extraction
+        const extracted = await GeminiService.generateResponse(message, retrieval, history);
+
+        // 3. Commit Extracted Entities
+        const addedEntities = [];
+        if (extracted.entities && Array.isArray(extracted.entities)) {
+            for (const ent of extracted.entities) {
+                if (ent.name) {
+                    const e = await MemoryEngine.ensureEntity(ent.name, ent.type, ent.attributes);
+                    addedEntities.push(e);
+                }
+            }
+        }
+
+        // 4. Commit Extracted Relations & Resolve Conflicts
+        const addedRelations = [];
+        let supersededRelationsCount = 0;
+        if (extracted.relations && Array.isArray(extracted.relations)) {
+            for (const rel of extracted.relations) {
+                if (rel.from && rel.relation && rel.to) {
+                    const outcome = await MemoryEngine.addRelation(rel.from, rel.relation, rel.to, {
+                        confidence: rel.confidence || 0.9,
+                        source: rel.source || 'direct_statement',
+                        type: 'fact'
+                    });
+                    addedRelations.push(outcome.relation);
+                    supersededRelationsCount += outcome.supersededCount;
+                }
+            }
+        }
+
+        // 5. Commit Revoked Relations
+        if (extracted.revokedRelations && Array.isArray(extracted.revokedRelations)) {
+            const allActive = await RelationRepository.findActive();
+            for (const rev of extracted.revokedRelations) {
+                for (const r of allActive) {
+                    if (
+                        r.from_entity.toLowerCase().includes(rev.from.toLowerCase()) &&
+                        r.relation.toLowerCase().includes(rev.relation.toLowerCase()) &&
+                        r.to_entity.toLowerCase().includes(rev.to.toLowerCase())
+                    ) {
+                        await RelationRepository.supersede(r.id, 'Revoked by user statement');
+                        supersededRelationsCount++;
+                    }
+                }
+            }
+        }
+
+        // 6. Commit Learned Procedures
+        let learnedProc = null;
+        if (extracted.learnedProcedure && extracted.learnedProcedure.name) {
+            learnedProc = await MemoryEngine.registerProcedure({
+                name: extracted.learnedProcedure.name,
+                trigger_keywords: extracted.learnedProcedure.triggerKeywords || [],
+                description: extracted.learnedProcedure.description || '',
+                category: (extracted.learnedProcedure.category as any) || 'workflow',
+                steps: extracted.learnedProcedure.steps || []
+            });
+        }
+
+        // 7. Commit Episode
+        const episodeSummary = extracted.episode ? extracted.episode.summary : message;
+        await MemoryEngine.addEpisode(
+            episodeSummary,
+            addedEntities.map(e => e.name),
+            (extracted.episode?.type as any) || 'event',
+            message
+        );
+
+        // 8. Update Session Working Memory
+        await SessionManager.addExchange(message, extracted.reply);
+
+        // 9. Full graph and telemetry for visual feedback
+        const allEntities = await EntityRepository.findAll();
+        const allRelations = await RelationRepository.findAll();
+
+        const telemetry = {
+            retrievedEntitiesCount: retrieval.subgraph.entities.length,
+            totalEntities: allEntities.length,
+            retrievedRelationsCount: retrieval.subgraph.relations.length,
+            totalRelations: allRelations.length,
+            retrievalPercentage: Math.round((retrieval.subgraph.entities.length / (allEntities.length || 1)) * 100),
+            retrievedEntitiesList: retrieval.subgraph.entities.map(e => e.name),
+            supersededCount: supersededRelationsCount
+        };
+
+        res.json({
+            reply: extracted.reply,
+            telemetry,
+            graph: {
+                entities: allEntities,
+                relations: allRelations
+            },
+            memoryAdded: {
+                entities: addedEntities,
+                relations: addedRelations,
+                learnedProcedure: learnedProc
+            }
+        });
+    } catch (err: any) {
+        console.error('[Chat Route Error]:', err.message);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+chatRouter.get('/session', async (req: Request, res: Response) => {
+    try {
+        const session = await SessionManager.getActiveSession();
+        const elapsed = Date.now() - new Date(session.last_activity).getTime();
+        const remainingMs = Math.max(0, 10 * 60 * 1000 - elapsed);
+
+        res.json({
+            sessionId: session.id,
+            status: session.status,
+            startedAt: session.started_at,
+            lastActivity: session.last_activity,
+            workingMemoryCount: (session.turns || []).length,
+            remainingSeconds: Math.floor(remainingMs / 1000)
+        });
+    } catch (err: any) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+chatRouter.post('/session/timeout', async (req: Request, res: Response) => {
+    try {
+        const result = await SessionManager.flushSession('manual_simulation');
+        const newSession = await SessionManager.getActiveSession();
+        res.json({
+            consolidated: true,
+            flushedSessionId: result.sessionId,
+            turnsCount: result.turnsCount,
+            newSessionId: newSession.id
+        });
+    } catch (err: any) {
+        res.status(500).json({ error: err.message });
+    }
+});
