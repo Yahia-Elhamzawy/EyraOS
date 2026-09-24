@@ -1,10 +1,14 @@
-# 🧠 EyraOS — Cognitive Memory Architecture for Intelligent Robotics
-### معمارية الوعي والذاكرة الإدراكية المستمرة للروبوتات الذكية
+<p align="center">
+  <img src="./assets/eyraos-banner.svg" alt="EyraOS Cognitive Architecture" width="100%" />
+</p>
 
-[![Node.js](https://img.shields.io/badge/Node.js-18%2B-green.svg)](https://nodejs.org/)
-[![Google Gemini](https://img.shields.io/badge/AI-Gemini%203.5%20Flash%20Lite-blue.svg)](https://ai.google.dev/)
-[![vis.js](https://img.shields.io/badge/vis.js-Knowledge%20Graph-orange.svg)](https://visjs.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-18%2B-green.svg?style=for-the-badge&logo=node.js" alt="Node.js" /></a>
+  <a href="https://ai.google.dev/"><img src="https://img.shields.io/badge/Google-Gemini%203.5%20Flash%20Lite-4285F4.svg?style=for-the-badge&logo=google" alt="Google Gemini" /></a>
+  <a href="https://visjs.org/"><img src="https://img.shields.io/badge/vis.js-Knowledge%20Graph-orange.svg?style=for-the-badge" alt="vis.js" /></a>
+  <a href="https://www.ros.org/"><img src="https://img.shields.io/badge/ROS%202-Ready-22314E.svg?style=for-the-badge&logo=ros" alt="ROS 2" /></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License: MIT" /></a>
+</p>
 
 ---
 
@@ -16,6 +20,14 @@
 > *(الذاكرة معارف مستقرة دائمة... بينما السياق هو نافذة اختيار مؤقتة).*
 
 EyraOS enables robots to continuously learn, resolve contradictions, acquire procedural skills, and consolidate experiences without cognitive degradation, hallucinations, or unbounded token consumption.
+
+---
+
+## 🌊 Real-Time Cognitive Dataflow / تدفق المعالجة الإدراكية
+
+<p align="center">
+  <img src="./assets/cognitive-stream.svg" alt="Real-Time Cognitive Stream" width="100%" />
+</p>
 
 ---
 
