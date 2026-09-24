@@ -1,93 +1,304 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 220" width="900" height="220">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 290" width="100%" height="290">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0c1222"/>
-      <stop offset="100%" stop-color="#111827"/>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0e172a" />
+      <stop offset="60%" stop-color="#080c17" />
+      <stop offset="100%" stop-color="#030712" />
+    </radialGradient>
+
+    <!-- Core Glow -->
+    <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06d6a0" stop-opacity="0.6" />
+      <stop offset="40%" stop-color="#3b82f6" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#0e172a" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Border Linear Gradient with Shifting Colors -->
+    <linearGradient id="neonBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06d6a0">
+        <animate attributeName="stop-color" values="#06d6a0;#3b82f6;#8b5cf6;#ec4899;#06d6a0" dur="8s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="50%" stop-color="#3b82f6">
+        <animate attributeName="stop-color" values="#3b82f6;#8b5cf6;#ec4899;#06d6a0;#3b82f6" dur="8s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" stop-color="#ec4899">
+        <animate attributeName="stop-color" values="#ec4899;#06d6a0;#3b82f6;#8b5cf6;#ec4899" dur="8s" repeatCount="indefinite" />
+      </stop>
     </linearGradient>
-    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#06d6a0"/>
-      <stop offset="100%" stop-color="#38bdf8"/>
+
+    <!-- Title Gradient -->
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06d6a0" />
+      <stop offset="50%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#a78bfa" />
     </linearGradient>
-    <linearGradient id="accent2" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#38bdf8"/>
-      <stop offset="100%" stop-color="#a78bfa"/>
-    </linearGradient>
+
+    <!-- Grid Pattern -->
+    <pattern id="cyberGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(56, 189, 248, 0.05)" stroke-width="1" />
+    </pattern>
+
+    <!-- Neon Drop Shadow Filter -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <style>
+      @keyframes rotateCW {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      @keyframes rotateCCW {
+        from { transform: rotate(360deg); }
+        to { transform: rotate(0deg); }
+      }
+      @keyframes pulseCore {
+        0%, 100% { transform: scale(1); opacity: 0.85; filter: drop-shadow(0 0 10px #06d6a0); }
+        50% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 0 22px #38bdf8); }
+      }
+      @keyframes streamFlow {
+        from { stroke-dashoffset: 60; }
+        to { stroke-dashoffset: 0; }
+      }
+      @keyframes blinkCursor {
+        0%, 49% { opacity: 1; }
+        50%, 100% { opacity: 0; }
+      }
+      @keyframes scanlineAnim {
+        0% { transform: translateY(-10px); opacity: 0; }
+        20% { opacity: 0.4; }
+        80% { opacity: 0.4; }
+        100% { transform: translateY(280px); opacity: 0; }
+      }
+      @keyframes nodePulse {
+        0%, 100% { transform: scale(1); opacity: 0.9; }
+        50% { transform: scale(1.25); opacity: 1; filter: drop-shadow(0 0 6px currentColor); }
+      }
+      @keyframes textSlide1 {
+        0%, 20% { opacity: 1; transform: translateY(0); }
+        25%, 95% { opacity: 0; transform: translateY(8px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes textSlide2 {
+        0%, 22% { opacity: 0; transform: translateY(-8px); }
+        27%, 47% { opacity: 1; transform: translateY(0); }
+        52%, 100% { opacity: 0; transform: translateY(8px); }
+      }
+      @keyframes textSlide3 {
+        0%, 48% { opacity: 0; transform: translateY(-8px); }
+        53%, 73% { opacity: 1; transform: translateY(0); }
+        78%, 100% { opacity: 0; transform: translateY(8px); }
+      }
+      @keyframes textSlide4 {
+        0%, 74% { opacity: 0; transform: translateY(-8px); }
+        79%, 96% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(8px); }
+      }
+
+      .rot-cw { transform-origin: 145px 145px; animation: rotateCW 22s linear infinite; }
+      .rot-ccw { transform-origin: 145px 145px; animation: rotateCCW 16s linear infinite; }
+      .rot-fast { transform-origin: 145px 145px; animation: rotateCW 10s linear infinite; }
+      .pulse-core { transform-origin: 145px 145px; animation: pulseCore 3s ease-in-out infinite; }
+      .stream-line { stroke-dasharray: 6 6; animation: streamFlow 1.2s linear infinite; }
+      .cursor { animation: blinkCursor 0.9s infinite; }
+      .scanline { animation: scanlineAnim 4s ease-in-out infinite; }
+
+      .term-line-1 { animation: textSlide1 14s ease-in-out infinite; }
+      .term-line-2 { animation: textSlide2 14s ease-in-out infinite; }
+      .term-line-3 { animation: textSlide3 14s ease-in-out infinite; }
+      .term-line-4 { animation: textSlide4 14s ease-in-out infinite; }
+    </style>
   </defs>
 
-  <!-- Background -->
-  <rect width="900" height="220" rx="0" fill="url(#bg)"/>
+  <!-- Card Background -->
+  <rect x="2" y="2" width="896" height="286" rx="16" fill="url(#bgGrad)" stroke="url(#neonBorder)" stroke-width="2" />
+  <rect x="4" y="4" width="892" height="282" rx="14" fill="url(#cyberGrid)" />
 
-  <!-- Subtle grid -->
-  <g opacity="0.04">
-    <line x1="0" y1="0" x2="0" y2="220" stroke="#fff" stroke-width="1" transform="translate(60,0)"/>
-    <line x1="0" y1="0" x2="0" y2="220" stroke="#fff" stroke-width="1" transform="translate(120,0)"/>
-    <line x1="0" y1="0" x2="0" y2="220" stroke="#fff" stroke-width="1" transform="translate(180,0)"/>
-    <line x1="0" y1="0" x2="0" y2="220" stroke="#fff" stroke-width="1" transform="translate(240,0)"/>
-    <line x1="0" y1="0" x2="900" y2="0" stroke="#fff" stroke-width="1" transform="translate(0,55)"/>
-    <line x1="0" y1="0" x2="900" y2="0" stroke="#fff" stroke-width="1" transform="translate(0,110)"/>
-    <line x1="0" y1="0" x2="900" y2="0" stroke="#fff" stroke-width="1" transform="translate(0,165)"/>
+  <!-- Animated Scanline -->
+  <line x1="10" y1="0" x2="890" y2="0" stroke="rgba(56, 189, 248, 0.4)" stroke-width="2" class="scanline" />
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- LEFT: HOLOGRAPHIC NEURAL CORE & COGNITIVE MEMORY LAYERS     -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Ambient Glow Behind Core -->
+  <circle cx="145" cy="145" r="110" fill="url(#coreGlow)" />
+
+  <!-- Orbit Ring 1 (Outer Slow Counter-Clockwise) -->
+  <circle cx="145" cy="145" r="96" fill="none" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1.5" stroke-dasharray="14 10 30 10" class="rot-ccw" />
+
+  <!-- Orbit Ring 2 (Middle Clockwise with Node Markers) -->
+  <g class="rot-cw">
+    <circle cx="145" cy="145" r="75" fill="none" stroke="rgba(6, 214, 160, 0.35)" stroke-width="1.5" stroke-dasharray="8 6" />
+    <circle cx="220" cy="145" r="4.5" fill="#06d6a0" filter="url(#neonGlow)" />
+    <circle cx="70" cy="145" r="4.5" fill="#38bdf8" filter="url(#neonGlow)" />
+    <circle cx="145" cy="70" r="4.5" fill="#a78bfa" filter="url(#neonGlow)" />
+    <circle cx="145" cy="220" r="4.5" fill="#f59e0b" filter="url(#neonGlow)" />
   </g>
 
-  <!-- Left accent bar -->
-  <rect x="0" y="0" width="4" height="220" fill="url(#accent)"/>
-
-  <!-- Core icon — simplified neural graph -->
-  <g transform="translate(70, 110)">
-    <!-- Outer ring -->
-    <circle cx="0" cy="0" r="38" fill="none" stroke="#1e293b" stroke-width="2"/>
-    <circle cx="0" cy="0" r="38" fill="none" stroke="url(#accent)" stroke-width="2" stroke-dasharray="12 8" opacity="0.5"/>
-    <!-- Inner ring -->
-    <circle cx="0" cy="0" r="22" fill="none" stroke="#1e293b" stroke-width="1.5"/>
-    <circle cx="0" cy="0" r="22" fill="none" stroke="url(#accent2)" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.4"/>
-    <!-- Core dot -->
-    <circle cx="0" cy="0" r="7" fill="#06d6a0" opacity="0.9"/>
-    <circle cx="0" cy="0" r="3" fill="#fff"/>
-    <!-- Nodes -->
-    <circle cx="0" cy="-38" r="4" fill="#38bdf8"/>
-    <circle cx="33" cy="19" r="4" fill="#a78bfa"/>
-    <circle cx="-33" cy="19" r="4" fill="#f59e0b"/>
-    <!-- Spokes -->
-    <line x1="0" y1="-7" x2="0" y2="-34" stroke="#38bdf8" stroke-width="1" opacity="0.3"/>
-    <line x1="6" y1="3" x2="29" y2="17" stroke="#a78bfa" stroke-width="1" opacity="0.3"/>
-    <line x1="-6" y1="3" x2="-29" y2="17" stroke="#f59e0b" stroke-width="1" opacity="0.3"/>
+  <!-- Orbit Ring 3 (Inner Fast Decorative Segments) -->
+  <g class="rot-fast">
+    <circle cx="145" cy="145" r="54" fill="none" stroke="rgba(167, 139, 250, 0.45)" stroke-width="2" stroke-dasharray="40 18 20 18" />
   </g>
 
-  <!-- Title block -->
-  <text x="140" y="78" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#f1f5f9" letter-spacing="-0.5">EyraOS</text>
-  <text x="140" y="108" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="15" font-weight="400" fill="#94a3b8">Cognitive Memory Architecture for Intelligent Robotics</text>
+  <!-- Connecting Synapse Lines with Flowing Data Streams -->
+  <path d="M 145 145 L 205 95" stroke="#06d6a0" stroke-width="1.5" opacity="0.6" class="stream-line" />
+  <path d="M 145 145 L 85 95" stroke="#38bdf8" stroke-width="1.5" opacity="0.6" class="stream-line" />
+  <path d="M 145 145 L 85 195" stroke="#a78bfa" stroke-width="1.5" opacity="0.6" class="stream-line" />
+  <path d="M 145 145 L 205 195" stroke="#f59e0b" stroke-width="1.5" opacity="0.6" class="stream-line" />
 
-  <!-- Separator line -->
-  <line x1="140" y1="122" x2="520" y2="122" stroke="url(#accent)" stroke-width="1" opacity="0.3"/>
-
-  <!-- Subtitle -->
-  <text x="140" y="145" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#64748b">9-Layer Cognitive Hierarchy</text>
-  <text x="140" y="164" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#64748b">Selective Retrieval  ·  Contradiction Engine  ·  Procedural Skills</text>
-  <text x="140" y="183" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#64748b">Dual-Stream Session Lifecycle  ·  Autonomous Reflection</text>
-
-  <!-- Right side — Architecture summary boxes -->
-  <g transform="translate(560, 48)">
-    <!-- Box 1 -->
-    <rect x="0" y="0" width="150" height="50" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
-    <text x="12" y="22" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" font-weight="700" fill="#06d6a0">SEMANTIC GRAPH</text>
-    <text x="12" y="38" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#64748b">Entity / Relation Store</text>
-
-    <!-- Box 2 -->
-    <rect x="164" y="0" width="150" height="50" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
-    <text x="176" y="22" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" font-weight="700" fill="#38bdf8">PROCEDURAL</text>
-    <text x="176" y="38" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#64748b">How-To Skills Engine</text>
-
-    <!-- Box 3 -->
-    <rect x="0" y="62" width="150" height="50" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
-    <text x="12" y="84" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" font-weight="700" fill="#a78bfa">REFLECTION</text>
-    <text x="12" y="100" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#64748b">Consolidation Engine</text>
-
-    <!-- Box 4 -->
-    <rect x="164" y="62" width="150" height="50" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
-    <text x="176" y="84" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" font-weight="700" fill="#f59e0b">WORKING MEM</text>
-    <text x="176" y="100" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#64748b">Session Decay / Flush</text>
+  <!-- Core Robot / Consciousness Icon Center -->
+  <g class="pulse-core">
+    <!-- Glowing Hexagon Core -->
+    <polygon points="145,115 171,130 171,160 145,175 119,160 119,130" fill="#0b1329" stroke="#06d6a0" stroke-width="2.5" />
+    <!-- Robotic Eye / Neural Node Aperture -->
+    <circle cx="145" cy="145" r="14" fill="#06d6a0" opacity="0.25" />
+    <circle cx="145" cy="145" r="8" fill="#38bdf8" />
+    <circle cx="145" cy="145" r="3.5" fill="#ffffff" />
   </g>
 
-  <!-- Version tag -->
-  <rect x="560" y="170" width="56" height="22" rx="4" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
-  <text x="588" y="185" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" font-weight="600" fill="#64748b">v1.0.0</text>
+  <!-- Memory Layer Satellite Pills -->
+  <g transform="translate(145, 145)">
+    <!-- Layer 3 Pill -->
+    <g transform="translate(68, -58)">
+      <rect x="-35" y="-10" width="70" height="20" rx="10" fill="rgba(6, 214, 160, 0.15)" stroke="#06d6a0" stroke-width="1" />
+      <text x="0" y="3.5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#06d6a0">L3: SEMANTIC</text>
+    </g>
+    <!-- Layer 5 Pill -->
+    <g transform="translate(68, 58)">
+      <rect x="-40" y="-10" width="80" height="20" rx="10" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1" />
+      <text x="0" y="3.5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#f59e0b">L5: PROCEDURAL</text>
+    </g>
+    <!-- Layer 8 Pill -->
+    <g transform="translate(-72, 58)">
+      <rect x="-35" y="-10" width="70" height="20" rx="10" fill="rgba(236, 72, 153, 0.15)" stroke="#ec4899" stroke-width="1" />
+      <text x="0" y="3.5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#ec4899">L8: WORKING</text>
+    </g>
+    <!-- Layer 9 Pill -->
+    <g transform="translate(-72, -58)">
+      <rect x="-38" y="-10" width="76" height="20" rx="10" fill="rgba(167, 139, 250, 0.15)" stroke="#a78bfa" stroke-width="1" />
+      <text x="0" y="3.5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#a78bfa">L9: REFLECT</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- RIGHT: BRANDING, LIVE TERMINAL & CONSCIOUSNESS STATUS      -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Top Title & Subtitle -->
+  <text x="300" y="52" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="900" letter-spacing="2" fill="url(#titleGrad)" filter="url(#neonGlow)">
+    EYRAOS // COGNITIVE KERNEL
+  </text>
+  <text x="300" y="74" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500" fill="#94a3b8" letter-spacing="0.5">
+    Autonomous Continuous Memory Architecture for Intelligent Robotics
+  </text>
+
+  <!-- Cyber Terminal Window -->
+  <g transform="translate(300, 92)">
+    <!-- Terminal Background Frame -->
+    <rect x="0" y="0" width="565" height="135" rx="10" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1" />
+    
+    <!-- Terminal Header Bar -->
+    <path d="M 0 10 A 10 10 0 0 1 10 0 L 555 0 A 10 10 0 0 1 565 10 L 565 26 L 0 26 Z" fill="rgba(30, 41, 59, 0.9)" />
+    <!-- Window Control Dots -->
+    <circle cx="16" cy="13" r="4" fill="#ef4444" />
+    <circle cx="28" cy="13" r="4" fill="#f59e0b" />
+    <circle cx="40" cy="13" r="4" fill="#10b981" />
+    
+    <!-- Terminal Title -->
+    <text x="56" y="16.5" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="11" fill="#cbd5e1">
+      kernel_daemon@eyraos:~ (continuous_consciousness.py)
+    </text>
+
+    <!-- Terminal Status Badge -->
+    <rect x="460" y="6" width="95" height="15" rx="7.5" fill="rgba(6, 214, 160, 0.2)" stroke="#06d6a0" stroke-width="0.8" />
+    <circle cx="470" cy="13.5" r="2.5" fill="#06d6a0" />
+    <text x="478" y="17" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#06d6a0">LIVE REASONING</text>
+
+    <!-- Static Kernel Prompt Lines -->
+    <text x="16" y="48" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="12" fill="#38bdf8">
+      $ eyra.memory_engine --status --layer-audit
+    </text>
+    <text x="16" y="68" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="11.5" fill="#64748b">
+      [OK] Architecture: 9-Layer Cognitive Hierarchy | Memory != Context Window
+    </text>
+
+    <!-- Animated Cycling Feature Telemetry (Transitions between 4 cognitive modules) -->
+    <!-- Slide 1 -->
+    <g class="term-line-1" transform="translate(16, 92)">
+      <text font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="12.5" font-weight="700" fill="#06d6a0">
+        ✦ [L3] Semantic Graph: 1-Hop Tiered Subgraph Retrieval Active (27% budget)
+      </text>
+      <text y="20" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="11" fill="#94a3b8">
+        ↳ Contradiction Engine: Auto-supersedes outdated facts with zero hallucination
+      </text>
+    </g>
+
+    <!-- Slide 2 -->
+    <g class="term-line-2" transform="translate(16, 92)">
+      <text font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="12.5" font-weight="700" fill="#f59e0b">
+        ✦ [L5] Procedural Engine: How-To Protocols &amp; Live In-Chat Skill Learning
+      </text>
+      <text y="20" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="11" fill="#94a3b8">
+        ↳ Step Execution Stepper: Logs executed skills directly into Episodic memory
+      </text>
+    </g>
+
+    <!-- Slide 3 -->
+    <g class="term-line-3" transform="translate(16, 92)">
+      <text font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="12.5" font-weight="700" fill="#ec4899">
+        ✦ [L8] Working Memory: Dual-Stream 15-Minute Inactivity Decay &amp; Auto-Flush
+      </text>
+      <text y="20" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="11" fill="#94a3b8">
+        ↳ Session Lifecycle: Decouples temporary banter from permanent knowledge
+      </text>
+    </g>
+
+    <!-- Slide 4 -->
+    <g class="term-line-4" transform="translate(16, 92)">
+      <text font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="12.5" font-weight="700" fill="#a78bfa">
+        ✦ [L9] Reflection Consolidation: Autonomous Post-Session Knowledge Deductions
+      </text>
+      <text y="20" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="11" fill="#94a3b8">
+        ↳ Arabic Revocation: Resolves negation without creating dummy negative nodes
+      </text>
+    </g>
+
+    <!-- Terminal Cursor -->
+    <rect x="530" y="81" width="7" height="13" fill="#38bdf8" class="cursor" />
+  </g>
+
+  <!-- Bottom Interactive Tech Badges -->
+  <g transform="translate(300, 246)">
+    <!-- Badge 1: ROS 2 Ready -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="108" height="24" rx="6" fill="rgba(34, 197, 94, 0.12)" stroke="#22c55e" stroke-width="0.8" />
+      <circle cx="12" cy="12" r="3.5" fill="#22c55e" />
+      <text x="22" y="16" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="700" fill="#4ade80">ROS 2 Ready</text>
+    </g>
+    <!-- Badge 2: Gemini 3.5 Flash Lite -->
+    <g transform="translate(116, 0)">
+      <rect x="0" y="0" width="158" height="24" rx="6" fill="rgba(56, 189, 248, 0.12)" stroke="#38bdf8" stroke-width="0.8" />
+      <circle cx="12" cy="12" r="3.5" fill="#38bdf8" />
+      <text x="22" y="16" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="700" fill="#38bdf8">Gemini 3.5 Flash Lite</text>
+    </g>
+    <!-- Badge 3: vis.js Live Network -->
+    <g transform="translate(282, 0)">
+      <rect x="0" y="0" width="134" height="24" rx="6" fill="rgba(167, 139, 250, 0.12)" stroke="#a78bfa" stroke-width="0.8" />
+      <circle cx="12" cy="12" r="3.5" fill="#a78bfa" />
+      <text x="22" y="16" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="700" fill="#c084fc">vis.js Live Network</text>
+    </g>
+    <!-- Badge 4: Dual-Stream Buffer -->
+    <g transform="translate(424, 0)">
+      <rect x="0" y="0" width="141" height="24" rx="6" fill="rgba(236, 72, 153, 0.12)" stroke="#ec4899" stroke-width="0.8" />
+      <circle cx="12" cy="12" r="3.5" fill="#ec4899" />
+      <text x="22" y="16" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="700" fill="#f472b6">Dual-Stream Buffer</text>
+    </g>
+  </g>
 </svg>
