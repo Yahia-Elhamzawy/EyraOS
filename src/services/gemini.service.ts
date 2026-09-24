@@ -3,8 +3,13 @@ import { CONFIG } from '../config/env';
 import { TieredRetrievalResult } from '../types/memory.types';
 
 const genAI = new GoogleGenerativeAI(CONFIG.GEMINI_API_KEY || 'MISSING_KEY');
-// Using gemini-2.5-flash or gemini-1.5-flash
-const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+const model = genAI.getGenerativeModel({
+    model: 'gemini-2.5-flash',
+    generationConfig: {
+        responseMimeType: 'application/json',
+        maxOutputTokens: 8192
+    }
+});
 
 export interface ExtractedFactPayload {
     reply: string;
@@ -30,44 +35,81 @@ export interface ExtractedFactPayload {
     };
 }
 
+function parseOrRepairJSON(text: string, fallbackMessage: string): ExtractedFactPayload {
+    let cleaned = text.trim();
+    if (cleaned.startsWith('```json')) cleaned = cleaned.slice(7);
+    if (cleaned.startsWith('```')) cleaned = cleaned.slice(3);
+    if (cleaned.endsWith('```')) cleaned = cleaned.slice(0, -3);
+    cleaned = cleaned.trim();
+
+    try {
+        return JSON.parse(cleaned);
+    } catch (e: any) {
+        console.warn('[Gemini Service] Standard JSON.parse failed, running resilient repair:', e.message);
+
+        // 1. Try to extract reply field via regex
+        const replyMatch = cleaned.match(/"reply"\s*:\s*"((?:[^"\\]|\\.)*)/s);
+        if (replyMatch && replyMatch[1]) {
+            let extractedReply = replyMatch[1]
+                .replace(/\\n/g, '\n')
+                .replace(/\\"/g, '"')
+                .replace(/\\\\/g, '\\')
+                .trim();
+            // If the reply string ended abruptly with an unescaped trailing quote or backslash
+            if (extractedReply.endsWith('\\')) extractedReply = extractedReply.slice(0, -1);
+
+            return {
+                reply: extractedReply,
+                entities: [],
+                relations: [],
+                episode: { summary: fallbackMessage.slice(0, 100), type: 'event' }
+            };
+        }
+
+        // 2. If response is raw plain text
+        if (!cleaned.startsWith('{')) {
+            return {
+                reply: cleaned,
+                entities: [],
+                relations: [],
+                episode: { summary: fallbackMessage.slice(0, 100), type: 'event' }
+            };
+        }
+
+        // 3. Fallback to clean natural reply
+        return {
+            reply: 'تم استلام المدخلات المفصلة واستيعابها بنجاح داخل الذاكرة المعرفية.',
+            entities: [],
+            relations: [],
+            episode: { summary: fallbackMessage.slice(0, 100), type: 'event' }
+        };
+    }
+}
+
 export class GeminiService {
     private static SYSTEM_PROMPT = `You are Eyra, an intelligent cognitive robot assistant powered by EyraOS.
 You operate on a Multi-Layer Cognitive Architecture:
 1. Online Fast-Stream (Immediate Declarative Facts):
-   Extract ONLY clear, explicit, declarative facts directly stated by the user (such as name, city of residence, profession, declared likes/dislikes, or explicit objects).
-   Do NOT extract casual chatter, temporary greetings, or transient conversational filler into 'entities' or 'relations'.
+   Extract ONLY clear, essential, declarative facts (max 10 key entities and max 10 key relations).
+   Do NOT generate exhaustive or bloated lists of every noun or sentence.
 2. Active Working Memory (Current Session):
    Maintain the natural context, references, and pronouns of the ongoing conversation.
 3. If the user states they NO LONGER live somewhere, NO LONGER like something, or negates a previously held fact:
    Put this in "revokedRelations": [
      {
        "from": "entity name",
-       "relation": "positive relation being revoked (e.g. lives_in, likes, works_at)",
+       "relation": "positive relation being revoked",
        "to": "entity name"
      }
    ]
-   IMPORTANT: Do NOT create negative relations (such as does_not_live_in or not_in) in "relations". Only record them in "revokedRelations".
+   IMPORTANT: Do NOT create negative relations in "relations". Only record them in "revokedRelations".
 4. Procedural Memory (Layer 5: How-To Skills & Action Sequences):
-   - If the user is teaching you a workflow, how-to procedure, or sequential protocol:
-     Extract it in "learnedProcedure":
-     {
-       "name": "اسم الإجراء أو المهارة بالعربية",
-       "triggerKeywords": ["كلمات", "مفتاحية"],
-       "description": "وصف مقتضب للهدف من الإجراء",
-       "category": "workflow|diagnostic|navigation|safety|general",
-       "steps": [
-         { "stepNumber": 1, "title": "عنوان الخطوة", "instruction": "ماذا تفعل بالضبط", "expectedOutcome": "النتيجة المتوقعة" }
-       ]
-     }
-   - If the user asks you to RUN, EXECUTE, SIMULATE, or EXPLAIN a procedure:
-     Respond explaining what will be done and include "proceduralExecution".
-5. Classify each interaction as an episode.
-
-IMPORTANT: Respond strictly in valid JSON format only without markdown code blocks.
+   If the user is teaching a workflow or procedure, extract it in "learnedProcedure" (concise steps).
+5. Output format must strictly adhere to the requested JSON schema. Keep reply informative and helpful.
 
 JSON Structure:
 {
-  "reply": "Your natural conversational reply to the user",
+  "reply": "Your natural conversational reply to the user in Arabic",
   "entities": [
     { "name": "clean entity name", "type": "person|place|food|object|concept|organization|technology|other", "attributes": {} }
   ],
@@ -142,17 +184,12 @@ Respond with valid JSON only:`;
         try {
             const result = await model.generateContent(fullPrompt);
             const rawText = result.response.text();
-            let cleaned = rawText.trim();
-            if (cleaned.startsWith('```json')) cleaned = cleaned.slice(7);
-            if (cleaned.startsWith('```')) cleaned = cleaned.slice(3);
-            if (cleaned.endsWith('```')) cleaned = cleaned.slice(0, -3);
-            cleaned = cleaned.trim();
-            return JSON.parse(cleaned);
+            return parseOrRepairJSON(rawText, userMessage);
         } catch (err: any) {
-            console.error('[Gemini Service] Error or parse failure:', err.message);
+            console.error('[Gemini Service] Model invocation failure:', err.message);
             return {
                 reply: `عذراً، حدث خطأ أثناء معالجة الاستجابة المعرفية: ${err.message}`,
-                episode: { summary: userMessage, type: 'event' }
+                episode: { summary: userMessage.slice(0, 100), type: 'event' }
             };
         }
     }
