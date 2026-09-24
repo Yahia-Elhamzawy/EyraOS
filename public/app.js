@@ -259,8 +259,12 @@
     }
 
     function addEdgeToGraph(relation) {
-        const fromNorm = relation.from.trim().toLowerCase();
-        const toNorm = relation.to.trim().toLowerCase();
+        const rawFrom = relation.from || relation.from_entity;
+        const rawTo = relation.to || relation.to_entity;
+        if (!rawFrom || !rawTo) return;
+
+        const fromNorm = rawFrom.trim().toLowerCase();
+        const toNorm = rawTo.trim().toLowerCase();
 
         const fromId = entityMap.get(fromNorm);
         const toId = entityMap.get(toNorm);
@@ -302,8 +306,8 @@
             relationStr: relation.relation,
             label: isSuperseded ? `${relation.relation} (ملغاة)` : relation.relation,
             title: isSuperseded 
-                ? `[ملغاة / Superseded]\n${relation.from} → ${relation.relation} → ${relation.to}`
-                : `${relation.from} → ${relation.relation} → ${relation.to}\nثقة: ${(confidence * 100).toFixed(0)}%`,
+                ? `[ملغاة / Superseded]\n${rawFrom} → ${relation.relation} → ${rawTo}`
+                : `${rawFrom} → ${relation.relation} → ${rawTo}\nثقة: ${(confidence * 100).toFixed(0)}%`,
             width: isSuperseded ? 1 : 1 + confidence * 2,
             dashes: isSuperseded ? [6, 4] : false,
             color: {
@@ -555,7 +559,7 @@
             data.supersededRelations.forEach(sRel => {
                 const badge = document.createElement('span');
                 badge.className = 'extraction-badge badge-superseded';
-                badge.innerHTML = `⚡ تم حل نزاع: ألغيت "${sRel.from} ${sRel.relation} ${sRel.to}"`;
+                badge.innerHTML = `⚡ تم حل نزاع: ألغيت "${sRel.from || sRel.from_entity} ${sRel.relation} ${sRel.to || sRel.to_entity}"`;
                 badgesDiv.appendChild(badge);
             });
         }
@@ -577,7 +581,7 @@
                 const badge = document.createElement('span');
                 badge.className = 'extraction-badge badge-relation';
                 badge.style.animationDelay = `${(i + (data.extractedEntities?.length || 0)) * 0.1}s`;
-                badge.innerHTML = `⟷ ${rel.from} → ${rel.relation} → ${rel.to}`;
+                badge.innerHTML = `⟷ ${rel.from || rel.from_entity} → ${rel.relation} → ${rel.to || rel.to_entity}`;
                 badgesDiv.appendChild(badge);
             });
         }

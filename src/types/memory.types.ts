@@ -21,6 +21,8 @@ export interface Relation {
     from_entity: string;
     relation: string;
     to_entity: string;
+    from?: string;
+    to?: string;
     confidence: number;
     source: string;
     type: 'fact' | 'inference' | 'learned';

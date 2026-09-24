@@ -2,13 +2,22 @@ import { query } from '../connection';
 import { Relation, MemoryStatus } from '../../types/memory.types';
 
 export class RelationRepository {
+    private static formatRelation(r: Relation): Relation {
+        if (!r) return r;
+        return {
+            ...r,
+            from: r.from || r.from_entity,
+            to: r.to || r.to_entity
+        };
+    }
+
     static async findAll(statusFilter?: MemoryStatus): Promise<Relation[]> {
         if (statusFilter) {
             const res = await query<Relation>('SELECT * FROM relations WHERE status = $1 ORDER BY updated_at DESC', [statusFilter]);
-            return res.rows;
+            return res.rows.map(this.formatRelation);
         }
         const res = await query<Relation>('SELECT * FROM relations ORDER BY updated_at DESC');
-        return res.rows;
+        return res.rows.map(this.formatRelation);
     }
 
     static async findActive(): Promise<Relation[]> {
@@ -22,7 +31,7 @@ export class RelationRepository {
              ORDER BY updated_at DESC`,
             [entityName]
         );
-        return res.rows;
+        return res.rows.map(this.formatRelation);
     }
 
     static async create(relation: Partial<Relation> & { id: string; from_entity: string; relation: string; to_entity: string }): Promise<Relation> {
@@ -42,7 +51,7 @@ export class RelationRepository {
                 relation.status || 'active'
             ]
         );
-        return res.rows[0];
+        return this.formatRelation(res.rows[0]);
     }
 
     static async reinforce(id: string): Promise<Relation | null> {
@@ -53,7 +62,7 @@ export class RelationRepository {
              RETURNING *`,
             [id]
         );
-        return res.rows[0] || null;
+        return res.rows[0] ? this.formatRelation(res.rows[0]) : null;
     }
 
     static async supersede(id: string, reason: string): Promise<Relation | null> {
@@ -64,7 +73,7 @@ export class RelationRepository {
              RETURNING *`,
             [id, reason]
         );
-        return res.rows[0] || null;
+        return res.rows[0] ? this.formatRelation(res.rows[0]) : null;
     }
 
     static async delete(id: string): Promise<boolean> {
