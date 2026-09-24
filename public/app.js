@@ -654,7 +654,7 @@
         }
     }
 
-    function showThinkingIndicator() {
+    function showThinkingIndicator(customText) {
         const thinkingDiv = document.createElement('div');
         thinkingDiv.className = 'message bot-message';
         thinkingDiv.id = 'thinkingMessage';
@@ -673,13 +673,14 @@
                 </defs>
             </svg>`;
 
+        const text = customText || 'بتفكر...';
         const indicator = document.createElement('div');
         indicator.className = 'thinking-indicator';
         indicator.innerHTML = `
             <div class="thinking-dots">
                 <span></span><span></span><span></span>
             </div>
-            <span class="thinking-text">بتفكر...</span>
+            <span class="thinking-text">${text}</span>
         `;
 
         thinkingDiv.appendChild(avatar);
@@ -788,7 +789,10 @@
         chatInput.style.height = 'auto';
 
         // Show thinking
-        showThinkingIndicator();
+        const thinkingText = message.length > 2000
+            ? 'جاري استيعاب وتقطيع الوثيقة الضخمة واستخراج كافة المعارف...'
+            : 'بتفكر...';
+        showThinkingIndicator(thinkingText);
 
         try {
             const response = await fetch(`${API_BASE}/api/chat`, {

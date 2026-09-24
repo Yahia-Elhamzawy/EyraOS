@@ -6,6 +6,7 @@ import { ProcedureRepository } from '../db/repositories/procedure.repo';
 import { MemoryEngine } from '../core/memory.engine';
 import { ReflectionService } from '../services/reflection.service';
 import { query } from '../db/connection';
+import { IngestionService } from '../services/ingestion.service';
 
 export const memoryRouter = Router();
 
@@ -139,6 +140,29 @@ memoryRouter.post('/memory/consolidate', async (req: Request, res: Response) => 
     try {
         const result = await ReflectionService.consolidateMemory();
         res.json(result);
+    } catch (err: any) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Bulk Document / Knowledge Ingestion
+memoryRouter.post('/memory/ingest', async (req: Request, res: Response) => {
+    try {
+        const { text, content } = req.body;
+        const targetText = text || content;
+        if (!targetText || !targetText.trim()) {
+            return res.status(400).json({ error: 'Text or content is required for knowledge ingestion' });
+        }
+
+        const report = await IngestionService.ingestDocument(targetText);
+        const entities = await EntityRepository.findAll();
+        const relations = await RelationRepository.findAll();
+
+        res.json({
+            success: true,
+            report,
+            graph: { entities, relations }
+        });
     } catch (err: any) {
         res.status(500).json({ error: err.message });
     }

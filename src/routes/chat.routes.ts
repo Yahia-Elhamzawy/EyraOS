@@ -6,6 +6,7 @@ import { SessionManager } from '../core/session.manager';
 import { EntityRepository } from '../db/repositories/entity.repo';
 import { RelationRepository } from '../db/repositories/relation.repo';
 import { ProcedureRepository } from '../db/repositories/procedure.repo';
+import { IngestionService } from '../services/ingestion.service';
 
 export const chatRouter = Router();
 
@@ -18,6 +19,47 @@ chatRouter.post('/chat', async (req: Request, res: Response) => {
 
         const session = await SessionManager.getActiveSession();
         const history = (session.turns || []).map(t => ({ role: t.role, content: t.content }));
+
+        // Check if message is a massive document / knowledge dump (> 2000 chars)
+        if (message.length > 2000) {
+            console.log(`[Chat Route] Massive knowledge input detected (${message.length} chars). Invoking Bulk Ingestion Pipeline...`);
+            const report = await IngestionService.ingestDocument(message);
+            const reply = `تم تفعيل **محرك الاستيعاب المعرفي المتدفق (Bulk Ingestion Engine)** بنجاح!
+
+تم تقسيم الوثيقة المعرفية إلى **${report.chunksProcessed} مقاطع دلالية**، وتم استخراج وتسجيل:
+• **${report.totalEntitiesAdded}** كيان معرفي في قاعدة البيانات.
+• **${report.totalRelationsAdded}** علاقة وشبكة عصبية مترابطة.
+• **${report.totalProceduresAdded}** إجراء وبروتوكول تنفيذي.
+
+أصبحت كافة هذه المعارف راسخة الآن في الـ Knowledge Graph ويمكنك استعراضها مباشرة على الشاشة أو سؤالي عن أي تفصيل فيها!`;
+
+            await SessionManager.addExchange(message.slice(0, 150) + '... [وثيقة معرفية ضخمة]', reply);
+
+            const allEntities = await EntityRepository.findAll();
+            const allRelations = await RelationRepository.findAll();
+
+            return res.json({
+                reply,
+                telemetry: {
+                    retrievedEntitiesCount: allEntities.length,
+                    totalEntities: allEntities.length,
+                    retrievedRelationsCount: allRelations.length,
+                    totalRelations: allRelations.length,
+                    retrievalPercentage: 100,
+                    retrievedEntitiesList: allEntities.slice(0, 15).map(e => e.name),
+                    supersededCount: 0
+                },
+                graph: {
+                    entities: allEntities,
+                    relations: allRelations
+                },
+                memoryAdded: {
+                    entities: allEntities.slice(-report.totalEntitiesAdded),
+                    relations: allRelations.slice(-report.totalRelationsAdded),
+                    learnedProcedure: null
+                }
+            });
+        }
 
         // 1. Multi-Tier Selective Retrieval
         const retrieval = await RetrievalEngine.retrieve(message, session.working_memory || {});
