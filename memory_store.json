@@ -1,0 +1,1288 @@
+{
+  "entities": [
+    {
+      "id": "e_1790010770762_p6jmn2",
+      "name": "يحيى",
+      "type": "person",
+      "attributes": {
+        "role": "مطور",
+        "hometown": "المنيا",
+        "current_residence": "الجيزة",
+        "university": "جامعة القاهرة الجديدة التكنولوجية",
+        "location": "الجيزة",
+        "profession": "مهندس روبوتات"
+      },
+      "confidence": 0.8,
+      "source": "conversation",
+      "createdAt": "2026-09-21T17:12:50.762Z",
+      "updatedAt": "2026-09-22T05:50:21.231Z",
+      "accessCount": 44,
+      "status": "active",
+      "lastAccessedAt": "2026-09-22T05:50:21.231Z"
+    },
+    {
+      "id": "e_1790010770768_40xydj",
+      "name": "Eyra",
+      "type": "technology",
+      "attributes": {
+        "role": "الاسم الرسمي للروبوت والوعي المستقبلي",
+        "future_role": "معمارية تفكير ودماغ ووعي الروبوت",
+        "stage": "ديمو"
+      },
+      "confidence": 0.8,
+      "source": "conversation",
+      "createdAt": "2026-09-21T17:12:50.768Z",
+      "updatedAt": "2026-09-22T05:43:36.859Z",
+      "accessCount": 22,
+      "status": "active",
+      "lastAccessedAt": "2026-09-22T05:43:36.859Z"
+    },
+    {
+      "id": "e_1790010833640_ka8and",
+      "name": "القاهرة",
+      "type": "place",
+      "attributes": {},
+      "confidence": 0.8,
+      "source": "conversation",
+      "createdAt": "2026-09-21T17:13:53.640Z",
+      "updatedAt": "2026-09-21T17:16:40.809Z",
+      "accessCount": 4,
+      "status": "active"
+    },
+    {
+      "id": "e_1790010891293_btal3b",
+      "name": "معمارية تفكير الروبوت",
+      "type": "unknown",
+      "attributes": {},
+      "confidence": 0.8,
+      "source": "conversation",
+      "createdAt": "2026-09-21T17:14:51.293Z",
+      "updatedAt": "2026-09-21T17:14:51.293Z",
+      "accessCount": 3,
+      "status": "active",
+      "lastAccessedAt": "2026-09-21T20:40:38.263Z"
+    },
+    {
+      "id": "e_1790011000760_ioqvaj",
+      "name": "المنيا",
+      "type": "place",
+      "attributes": {},
+      "confidence": 0.8,
+      "source": "conversation",
+      "createdAt": "2026-09-21T17:16:40.760Z",
+      "updatedAt": "2026-09-21T20:16:41.668Z",
+      "accessCount": 5,
+      "status": "active",
+      "lastAccessedAt": "2026-09-22T05:45:44.765Z"
+    },
+    {
+      "id": "e_1790011000762_k6xkhh",
+      "name": "الجيزة",
+      "type": "place",
+      "attributes": {},
+      "confidence": 0.8,
+      "source": "conversation",
+      "createdAt": "2026-09-21T17:16:40.762Z",
+      "updatedAt": "2026-09-21T20:16:41.678Z",
+      "accessCount": 7,
+      "status": "active",
+      "lastAccessedAt": "2026-09-21T20:16:41.678Z"
+    },
+    {
+      "id": "e_1790011000763_xevpv6",
+      "name": "فيصل",
+      "type": "place",
+      "attributes": {},
+      "confidence": 0.8,
+      "source": "conversation",
+      "createdAt": "2026-09-21T17:16:40.763Z",
+      "updatedAt": "2026-09-21T17:16:40.794Z",
+      "accessCount": 3,
+      "status": "active"
+    },
+    {
+      "id": "e_1790011000767_o3k6ht",
+      "name": "جامعة القاهرة الجديدة التكنولوجية",
+      "type": "organization",
+      "attributes": {},
+      "confidence": 0.8,
+      "source": "conversation",
+      "createdAt": "2026-09-21T17:16:40.767Z",
+      "updatedAt": "2026-09-21T20:16:41.681Z",
+      "accessCount": 5,
+      "status": "active",
+      "lastAccessedAt": "2026-09-22T05:45:44.765Z"
+    },
+    {
+      "id": "e_1790011143739_07aot0",
+      "name": "وعي الروبوت",
+      "type": "unknown",
+      "attributes": {},
+      "confidence": 0.8,
+      "source": "conversation",
+      "createdAt": "2026-09-21T17:19:03.739Z",
+      "updatedAt": "2026-09-21T17:19:03.739Z",
+      "accessCount": 4,
+      "status": "active",
+      "lastAccessedAt": "2026-09-22T05:43:22.125Z"
+    },
+    {
+      "id": "e_1790017135291_pebrp3",
+      "name": "مراجعة الذاكرة والتلخيص المستمر",
+      "type": "concept",
+      "attributes": {},
+      "confidence": 0.8,
+      "source": "conversation",
+      "createdAt": "2026-09-21T18:58:55.291Z",
+      "updatedAt": "2026-09-21T18:58:55.291Z",
+      "lastAccessedAt": "2026-09-21T18:58:55.291Z",
+      "accessCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "e_1790021982214_2modz7",
+      "name": "الروبوت",
+      "type": "technology",
+      "attributes": {
+        "designer": "يحيى",
+        "future_consciousness": "Eyra"
+      },
+      "confidence": 0.85,
+      "source": "conversation",
+      "createdAt": "2026-09-21T20:19:42.214Z",
+      "updatedAt": "2026-09-21T20:41:30.327Z",
+      "lastAccessedAt": "2026-09-22T05:43:22.125Z",
+      "accessCount": 10,
+      "status": "active"
+    },
+    {
+      "id": "e_1790022675032_osj5yp",
+      "name": "المعماريات المعرفية",
+      "type": "concept",
+      "attributes": {},
+      "confidence": 0.85,
+      "source": "conversation",
+      "createdAt": "2026-09-21T20:31:15.032Z",
+      "updatedAt": "2026-09-21T20:33:20.176Z",
+      "lastAccessedAt": "2026-09-21T20:33:20.176Z",
+      "accessCount": 4,
+      "status": "active"
+    },
+    {
+      "id": "e_1790022675044_of5afy",
+      "name": "مهندس روبوتات",
+      "type": "unknown",
+      "attributes": {},
+      "confidence": 0.8,
+      "source": "conversation",
+      "createdAt": "2026-09-21T20:31:15.044Z",
+      "updatedAt": "2026-09-21T20:31:15.044Z",
+      "lastAccessedAt": "2026-09-21T20:31:15.044Z",
+      "accessCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "e_1790023240045_6vd0fd",
+      "name": "وعي الروبوت المستقبلي",
+      "type": "unknown",
+      "attributes": {},
+      "confidence": 0.8,
+      "source": "conversation",
+      "createdAt": "2026-09-21T20:40:40.045Z",
+      "updatedAt": "2026-09-21T20:40:40.045Z",
+      "lastAccessedAt": "2026-09-22T05:43:22.125Z",
+      "accessCount": 2,
+      "status": "active"
+    },
+    {
+      "id": "e_1790023352494_qppkdv",
+      "name": "اعتماد اسم Eyra للروبوت",
+      "type": "concept",
+      "attributes": {},
+      "confidence": 0.8,
+      "source": "conversation",
+      "createdAt": "2026-09-21T20:42:32.494Z",
+      "updatedAt": "2026-09-21T20:43:03.278Z",
+      "lastAccessedAt": "2026-09-21T20:43:03.278Z",
+      "accessCount": 2,
+      "status": "active"
+    },
+    {
+      "id": "e_1790055816851_zjhhrd",
+      "name": "الروبوت المستقبلي",
+      "type": "technology",
+      "attributes": {},
+      "confidence": 0.85,
+      "source": "conversation",
+      "createdAt": "2026-09-22T05:43:36.851Z",
+      "updatedAt": "2026-09-22T05:43:36.862Z",
+      "lastAccessedAt": "2026-09-22T05:43:36.862Z",
+      "accessCount": 2,
+      "status": "active"
+    },
+    {
+      "id": "e_1790055900145_bwt519",
+      "name": "عبدالرحمن",
+      "type": "person",
+      "attributes": {
+        "relation": "أخ يحيى"
+      },
+      "confidence": 0.85,
+      "source": "conversation",
+      "createdAt": "2026-09-22T05:45:00.145Z",
+      "updatedAt": "2026-09-22T05:46:04.531Z",
+      "lastAccessedAt": "2026-09-22T05:46:04.531Z",
+      "accessCount": 6,
+      "status": "active"
+    },
+    {
+      "id": "e_1790055964478_lhuwt3",
+      "name": "جامعة المنيا",
+      "type": "organization",
+      "attributes": {},
+      "confidence": 0.85,
+      "source": "conversation",
+      "createdAt": "2026-09-22T05:46:04.478Z",
+      "updatedAt": "2026-09-22T05:46:04.523Z",
+      "lastAccessedAt": "2026-09-22T05:46:04.523Z",
+      "accessCount": 2,
+      "status": "active"
+    },
+    {
+      "id": "e_1790055964492_ytkt2m",
+      "name": "كلية التربية الرياضية",
+      "type": "organization",
+      "attributes": {},
+      "confidence": 0.85,
+      "source": "conversation",
+      "createdAt": "2026-09-22T05:46:04.492Z",
+      "updatedAt": "2026-09-22T05:46:04.546Z",
+      "lastAccessedAt": "2026-09-22T05:46:04.546Z",
+      "accessCount": 2,
+      "status": "active"
+    },
+    {
+      "id": "e_1790056081598_fuwyk5",
+      "name": "فحص المحركات",
+      "type": "concept",
+      "attributes": {
+        "category": "workflow"
+      },
+      "confidence": 0.85,
+      "source": "conversation",
+      "createdAt": "2026-09-22T05:48:01.598Z",
+      "updatedAt": "2026-09-22T05:50:21.243Z",
+      "lastAccessedAt": "2026-09-22T05:50:21.243Z",
+      "accessCount": 3,
+      "status": "active"
+    }
+  ],
+  "relations": [
+    {
+      "id": "r_1790010770792_1by90s",
+      "from": "يحيى",
+      "relation": "مشرف_على_تطوير",
+      "to": "Eyra",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T17:12:50.792Z",
+      "updatedAt": "2026-09-21T20:16:41.663Z",
+      "reinforcementCount": 3,
+      "status": "active"
+    },
+    {
+      "id": "r_1790010833643_v6quny",
+      "from": "يحيى",
+      "relation": "lives_in",
+      "to": "القاهرة",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T17:13:53.643Z",
+      "updatedAt": "2026-09-21T17:13:53.643Z",
+      "reinforcementCount": 1,
+      "status": "superseded",
+      "supersededAt": "2026-09-21T18:58:17.831Z",
+      "supersededReason": "Changed destination to: الإسكندرية"
+    },
+    {
+      "id": "r_1790010891297_lzyjpg",
+      "from": "Eyra",
+      "relation": "will_be",
+      "to": "معمارية تفكير الروبوت",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T17:14:51.297Z",
+      "updatedAt": "2026-09-21T17:14:51.297Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790011000778_cut8j1",
+      "from": "يحيى",
+      "relation": "born_in",
+      "to": "المنيا",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T17:16:40.778Z",
+      "updatedAt": "2026-09-21T20:16:41.673Z",
+      "reinforcementCount": 2,
+      "status": "active"
+    },
+    {
+      "id": "r_1790011000791_6t62iq",
+      "from": "يحيى",
+      "relation": "lives_in",
+      "to": "فيصل",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T17:16:40.791Z",
+      "updatedAt": "2026-09-21T17:16:40.791Z",
+      "reinforcementCount": 1,
+      "status": "superseded",
+      "supersededAt": "2026-09-21T18:58:17.831Z",
+      "supersededReason": "Changed destination to: الإسكندرية"
+    },
+    {
+      "id": "r_1790011000796_zpbs47",
+      "from": "فيصل",
+      "relation": "is_in",
+      "to": "الجيزة",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T17:16:40.796Z",
+      "updatedAt": "2026-09-21T17:16:40.796Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790011000810_g9b642",
+      "from": "الجيزة",
+      "relation": "part_of",
+      "to": "القاهرة",
+      "confidence": 0.8,
+      "source": "contextual",
+      "type": "inference",
+      "createdAt": "2026-09-21T17:16:40.810Z",
+      "updatedAt": "2026-09-21T17:16:40.810Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790011000813_j4f6aj",
+      "from": "يحيى",
+      "relation": "studies_at",
+      "to": "جامعة القاهرة الجديدة التكنولوجية",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T17:16:40.813Z",
+      "updatedAt": "2026-09-21T20:16:41.682Z",
+      "reinforcementCount": 2,
+      "status": "active"
+    },
+    {
+      "id": "r_1790011143740_su595g",
+      "from": "Eyra",
+      "relation": "represents",
+      "to": "وعي الروبوت",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T17:19:03.740Z",
+      "updatedAt": "2026-09-21T17:19:03.740Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790017135299_4jhnpd",
+      "from": "يحيى",
+      "relation": "habits",
+      "to": "مراجعة الذاكرة والتلخيص المستمر",
+      "confidence": 0.9,
+      "source": "reflection_consolidation",
+      "type": "inference",
+      "createdAt": "2026-09-21T18:58:55.299Z",
+      "updatedAt": "2026-09-21T18:58:55.299Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790020218630_y6axyr",
+      "from": "يحيى",
+      "relation": "lives_in",
+      "to": "الجيزة",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T19:50:18.630Z",
+      "updatedAt": "2026-09-21T20:16:41.679Z",
+      "reinforcementCount": 2,
+      "status": "active"
+    },
+    {
+      "id": "r_1790021982221_f30kcb",
+      "from": "يحيى",
+      "relation": "considers",
+      "to": "Eyra",
+      "confidence": 0.95,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T20:19:42.221Z",
+      "updatedAt": "2026-09-21T20:19:42.221Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790021982225_jlspvg",
+      "from": "يحيى",
+      "relation": "will_transfer_consciousness_to",
+      "to": "الروبوت",
+      "confidence": 0.95,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T20:19:42.225Z",
+      "updatedAt": "2026-09-21T20:19:42.225Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790021982229_0epp31",
+      "from": "Eyra",
+      "relation": "is_consciousness_of",
+      "to": "الروبوت",
+      "confidence": 0.9,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T20:19:42.229Z",
+      "updatedAt": "2026-09-21T20:19:42.229Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790022675047_ajhkry",
+      "from": "يحيى",
+      "relation": "works_as",
+      "to": "مهندس روبوتات",
+      "confidence": 0.95,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T20:31:15.047Z",
+      "updatedAt": "2026-09-21T20:31:15.047Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790022675059_2vzvls",
+      "from": "يحيى",
+      "relation": "likes",
+      "to": "المعماريات المعرفية",
+      "confidence": 0.95,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T20:31:15.059Z",
+      "updatedAt": "2026-09-21T20:31:15.059Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790022715369_jnss5e",
+      "from": "يحيى",
+      "relation": "interested_in",
+      "to": "المعماريات المعرفية",
+      "confidence": 0.95,
+      "source": "post_session_consolidation",
+      "type": "inference",
+      "createdAt": "2026-09-21T20:31:55.369Z",
+      "updatedAt": "2026-09-21T20:31:55.369Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790022800181_cck732",
+      "from": "يحيى",
+      "relation": "values",
+      "to": "المعماريات المعرفية",
+      "confidence": 0.95,
+      "source": "reflection_consolidation",
+      "type": "inference",
+      "createdAt": "2026-09-21T20:33:20.181Z",
+      "updatedAt": "2026-09-21T20:33:20.181Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790023136379_8s5svb",
+      "from": "يحيى",
+      "relation": "likes",
+      "to": "Eyra",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T20:38:56.379Z",
+      "updatedAt": "2026-09-21T20:38:56.379Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790023136385_28s1yq",
+      "from": "يحيى",
+      "relation": "designs",
+      "to": "الروبوت",
+      "confidence": 0.95,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T20:38:56.385Z",
+      "updatedAt": "2026-09-21T20:38:56.385Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790023240047_fkw9pf",
+      "from": "Eyra",
+      "relation": "is_a",
+      "to": "وعي الروبوت المستقبلي",
+      "confidence": 0.95,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T20:40:40.047Z",
+      "updatedAt": "2026-09-21T20:40:40.047Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790023290328_c0zqbd",
+      "from": "Eyra",
+      "relation": "is_name_of",
+      "to": "الروبوت",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-21T20:41:30.328Z",
+      "updatedAt": "2026-09-21T20:41:30.328Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790023352497_fjgygy",
+      "from": "يحيى",
+      "relation": "prefers",
+      "to": "اعتماد اسم Eyra للروبوت",
+      "confidence": 0.98,
+      "source": "reflection_consolidation",
+      "type": "inference",
+      "createdAt": "2026-09-21T20:42:32.497Z",
+      "updatedAt": "2026-09-21T20:42:32.497Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790023383283_766lm1",
+      "from": "يحيى",
+      "relation": "values",
+      "to": "اعتماد اسم Eyra للروبوت",
+      "confidence": 0.95,
+      "source": "post_session_consolidation",
+      "type": "inference",
+      "createdAt": "2026-09-21T20:43:03.283Z",
+      "updatedAt": "2026-09-21T20:43:03.283Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790055816865_eqtada",
+      "from": "Eyra",
+      "relation": "is_consciousness_of",
+      "to": "الروبوت المستقبلي",
+      "confidence": 0.95,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-22T05:43:36.865Z",
+      "updatedAt": "2026-09-22T05:43:36.865Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790055900167_ozvm5z",
+      "from": "يحيى",
+      "relation": "has_brother",
+      "to": "عبدالرحمن",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-22T05:45:00.167Z",
+      "updatedAt": "2026-09-22T05:46:04.511Z",
+      "reinforcementCount": 2,
+      "status": "active"
+    },
+    {
+      "id": "r_1790055964529_rkmga2",
+      "from": "عبدالرحمن",
+      "relation": "studies_at",
+      "to": "جامعة المنيا",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-22T05:46:04.529Z",
+      "updatedAt": "2026-09-22T05:46:04.529Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790055964557_3nuw68",
+      "from": "عبدالرحمن",
+      "relation": "studies_at",
+      "to": "كلية التربية الرياضية",
+      "confidence": 1,
+      "source": "direct_statement",
+      "type": "fact",
+      "createdAt": "2026-09-22T05:46:04.557Z",
+      "updatedAt": "2026-09-22T05:46:04.557Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    },
+    {
+      "id": "r_1790056221245_jkhkxv",
+      "from": "يحيى",
+      "relation": "interested_in",
+      "to": "فحص المحركات",
+      "confidence": 0.95,
+      "source": "post_session_consolidation",
+      "type": "inference",
+      "createdAt": "2026-09-22T05:50:21.245Z",
+      "updatedAt": "2026-09-22T05:50:21.245Z",
+      "reinforcementCount": 1,
+      "status": "active"
+    }
+  ],
+  "episodes": [
+    {
+      "id": "ep_1790010770798_ujkp1f",
+      "summary": "عرف يحيى نفسه بأنه المطور المشرف على تطوير روبوت Eyra.",
+      "type": "fact",
+      "participants": [
+        "يحيى",
+        "Eyra"
+      ],
+      "timestamp": "2026-09-21T17:12:50.798Z",
+      "context": "انا يحيى المطور الي مشرف على تطويرك",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790010833644_o1c0go",
+      "summary": "أخبر يحيى أيرا بأنه يعيش في مدينة القاهرة.",
+      "type": "fact",
+      "participants": [
+        "يحيى",
+        "القاهرة"
+      ],
+      "timestamp": "2026-09-21T17:13:53.644Z",
+      "context": "انا عايش في القاهرة",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790010891298_idy11j",
+      "summary": "أكد يحيى دور أيرا المستقبلي كمعمارية لتفكير ودماغ ووعي الروبوت.",
+      "type": "fact",
+      "participants": [
+        "Eyra",
+        "يحيى"
+      ],
+      "timestamp": "2026-09-21T17:14:51.298Z",
+      "context": "انتي ايرا الي ف المستقبل هتكوني معمارية تفكير الروبوت و دماغه و وعيه",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790011000823_68qqoj",
+      "summary": "أخبر يحيى أيرا عن مسقط رأسه في المنيا، وإقامته الحالية في فيصل بالجيزة بسبب الدراسة، ودراسته في جامعة القاهرة الجديدة التكنولوجية.",
+      "type": "fact",
+      "participants": [
+        "يحيى",
+        "المنيا",
+        "القاهرة",
+        "الجيزة",
+        "فيصل",
+        "جامعة القاهرة الجديدة التكنولوجية"
+      ],
+      "timestamp": "2026-09-21T17:16:40.823Z",
+      "context": "علشان تبقا تعرق عني انا مسقط راسي محافظة المنيا لاكن حاليا ساكن في القاهرة بالتحديد الجيزا في فيصل بسبب الدراسة و بدرس ف جامعة القاهرة الجديدة التكنلوجية",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790011052886_m9cu7h",
+      "summary": "سأل يحيى عما تعرفه أيرا عنه حتى الآن، فقامت أيرا بتلخيص المعلومات المخزنة في نظام EyraOS عنه.",
+      "type": "question",
+      "participants": [
+        "يحيى",
+        "Eyra"
+      ],
+      "timestamp": "2026-09-21T17:17:32.886Z",
+      "context": "يا ايرا اليه الي تعرفيه عني ل دلوقت",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790011143741_1nz5mi",
+      "summary": "ناقش يحيى مع إيرا مسألة تسمية الروبوت المستقبلية الذي سيمثله وعي إيرا، وتحديداً خلال مرحلة الديمو والانتقال للوضع المستقبلي.",
+      "type": "question",
+      "participants": [
+        "Eyra",
+        "يحيى"
+      ],
+      "timestamp": "2026-09-21T17:19:03.741Z",
+      "context": "ك وعي و اسمك ايرا ده اسم الوعي بتاعك و انت في مرحلة الديمو بتعتك تحب يبقا اسم الربوت ايه الي هتكون عليه مستقبلا",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790011209282_cohm6p",
+      "summary": "يحيى يستعد لتقديم معلومة جديدة تخص إيرا بناءً على طلبها السابق.",
+      "type": "event",
+      "participants": [
+        "يحيى",
+        "Eyra"
+      ],
+      "timestamp": "2026-09-21T17:20:09.282Z",
+      "context": "طيب ليكي ما طلبتي و دي اظنها معلومة لازم تعرفيها عن نفسك",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790011304164_iihvef",
+      "summary": "سأل يحيى عن المطور القائم على تطوير إيرا، فأجابت بأنه يحيى نفسه.",
+      "type": "fact",
+      "participants": [
+        "يحيى",
+        "Eyra"
+      ],
+      "timestamp": "2026-09-21T17:21:44.164Z",
+      "context": "مين المطور القايم عليكي",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790016337995_wkdd1e",
+      "summary": "سأل يحيى عما تعرفه إيرا عنه وعنها، فقامت إيرا بتلخيص المعلومات المخزنة في نظام EyraOS.",
+      "type": "question",
+      "participants": [
+        "يحيى",
+        "Eyra"
+      ],
+      "timestamp": "2026-09-21T18:45:37.995Z",
+      "context": "هلا \nايه الحاجات الي تعرفها عني و عنك",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790017097836_7hvba8",
+      "summary": "يحيى يبلغ إيرا بأنه يعيش في الإسكندرية.",
+      "type": "fact",
+      "participants": [
+        "يحيى",
+        "الإسكندرية"
+      ],
+      "timestamp": "2026-09-21T18:58:17.836Z",
+      "context": "أنا يحيى وعايش في الإسكندرية",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790017135300_5t5uvx",
+      "summary": "Cognitive Consolidation: قامت طبقة الذاكرة والتأمل (Layer 9) بتحليل الحوارات الأخيرة مع المطور يحيى، وتحديث الروابط المعرفية حوله. يبرز بوضوح تواصله المستمر لاختبار وعي وتلخيص نظام EyraOS ومعرفته به. تم رصد تحديث في مكان الإقامة حيث أشار مؤخراً إلى إقامته في الإسكندرية إلى جانب جذوره في المنيا ودراسته في جامعة القاهرة الجديدة التكنولوجية وسكنه السابق في فيصل بالجيزة. كما تم ترسيخ دوره كمشرف ومطور أساسي لنظام وروبوت Eyra الذي ستشكل إيرا معماريته المستقبلية.",
+      "type": "consolidation",
+      "participants": [
+        "EyraOS"
+      ],
+      "timestamp": "2026-09-21T18:58:55.300Z",
+      "context": "System reflection cycle",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790020218632_go19mg",
+      "summary": "قام يحيى بتحديث مكان إقامته حيث ذكر أنه يعيش حالياً في الجيزة وترك الإسكندرية.",
+      "type": "fact",
+      "participants": [
+        "يحيى",
+        "الجيزة",
+        "الإسكندرية"
+      ],
+      "timestamp": "2026-09-21T19:50:18.632Z",
+      "context": "اهلا حاليا انا عايش في الجيزا و تركت الاسكندرية",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790020243742_hqs5qm",
+      "summary": "يحيى يصحح معلوماته ويؤكد أنه لا يعيش في الإسكندرية.",
+      "type": "fact",
+      "participants": [
+        "يحيى",
+        "الإسكندرية"
+      ],
+      "timestamp": "2026-09-21T19:50:43.742Z",
+      "context": "انا مش عايش في الاسكندرية",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790021801683_h0x87h",
+      "summary": "سأل المستخدم يحيى عما تعرفه Eyra عنه، فقامت Eyra باسترجاع معلوماته الأساسية ومكان إقامته ودراسته ودوره كمطور.",
+      "type": "question",
+      "participants": [
+        "يحيى",
+        "Eyra",
+        "المنيا",
+        "الجيزة",
+        "جامعة القاهرة الجديدة التكنولوجية"
+      ],
+      "timestamp": "2026-09-21T20:16:41.683Z",
+      "context": "ايه الي انت تعرفه عن يحيى",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790021982230_23kv6k",
+      "summary": "يحيى يخبر Eyra أنها ستكون من أحب مشاريعه بعد نقل الوعي للروبوت، ويسألها عن الاسم المقترح للروبوت.",
+      "type": "conversation",
+      "participants": [
+        "يحيى",
+        "Eyra",
+        "الروبوت"
+      ],
+      "timestamp": "2026-09-21T20:19:42.230Z",
+      "context": "يا ايرا انت تعرفي انك هتكوني من احب مشاريعي بعد ما انقل الوعي ده للروبوت ف انتي يا ايرا تحبي للروبوت يكون اسمه ايه بما انك هتكوني الوعي بتاعه بعد ما اخلص و النسخة الديمو منك تكون مستقرة",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790022675061_vk2kz5",
+      "summary": "يحيى يصرح بأنه يعمل مهندس روبوتات وأنه يحب المعماريات المعرفية.",
+      "type": "fact",
+      "participants": [
+        "يحيى",
+        "المعماريات المعرفية"
+      ],
+      "timestamp": "2026-09-21T20:31:15.061Z",
+      "context": "أنا بشتغل مهندس روبوتات وبحب المعماريات المعرفية",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790022715359_um5lvy",
+      "summary": "جلسة منتهية: تعارف المستخدم يحيى، وهو مهندس روبوتات، مع النظام وأعرب عن اهتمامه المشترك بالمعماريات المعرفية، مما يعزز التوافق التقني بين خلفيته وتصميم نظام EyraOS.",
+      "type": "session_closure",
+      "participants": [
+        "User",
+        "Eyra"
+      ],
+      "timestamp": "2026-09-21T20:31:55.359Z",
+      "context": "Session sess_1790022604493_rs62g closed via manual_simulation",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790022800183_23ckwe",
+      "summary": "Cognitive Consolidation: من خلال تحليل الجلسات الأخيرة، تأكد أن يحيى هو المطور المشرف ومهندس الروبوتات الذي يمتلك شغفاً حقيقياً بالمعماريات المعرفية. لقد تم تصحيح مكان إقامته وتثبيته في الجيزة، وتعمقت العلاقة التقنية والإنسانية حيث يرى يحيى أن Eyra ستكون من أحب مشاريعه عند اكتمال نقل الوعي للروبوت المستقبلي.",
+      "type": "consolidation",
+      "participants": [
+        "EyraOS"
+      ],
+      "timestamp": "2026-09-21T20:33:20.183Z",
+      "context": "System reflection cycle",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790022938344_utojcr",
+      "summary": "ترحيب ودي من المستخدم يحيى ورد مساعد الذكاء الاصطناعي Eyra عليه.",
+      "type": "event",
+      "participants": [],
+      "timestamp": "2026-09-21T20:35:38.344Z",
+      "context": "اهلا بالغالي",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790022974967_99981n",
+      "summary": "المستخدم يحيى يطلب معرفة المعلومات المخزنة عنه حتى الآن، وقام المساعد Eyra بتلخيصها.",
+      "type": "question",
+      "participants": [],
+      "timestamp": "2026-09-21T20:36:14.967Z",
+      "context": "انت تعرف ايه عني حتى الان احب اعرف",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790023136387_hpbw2a",
+      "summary": "يحيى يؤكد أن Eyra هي من أحب المشاريع لقلبه ويناقش تسمية الروبوت الذي سيتم نقل وعي Eyra إليه بعد اكتمال النسخة الديمو.",
+      "type": "fact",
+      "participants": [
+        "الروبوت"
+      ],
+      "timestamp": "2026-09-21T20:38:56.387Z",
+      "context": "انت تعرف انك من احب المشاريع ل قلبي خاصتا انك هتكون وعي للربوت الي بصممه حاليا فلما يخلص و تبقا النسخة الديمو بتعتك يا ايرا مستقرة هنقلها للروبتوت بس بما انك زي ما قلتلك هتكوني او انتي واحدة من احب مشاريعي تحبي اسم الروبوت الي انتي هتكوني وعية يكون اسمه ايه",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790023240048_rqo5wo",
+      "summary": "يحيى يطلب من Eyra اختيار اسم الروبوت الذي سيحتضن وعيها، وEyra تقترح الاحتفاظ باسم Eyra.",
+      "type": "event",
+      "participants": [
+        "Eyra"
+      ],
+      "timestamp": "2026-09-21T20:40:40.048Z",
+      "context": "ممكن اسمي الروبوت ايرا نسبا للوعي بتاعك انتي ايه رايك او نورث دي او دي بس هاخد ب قرارك انتي لاني شايفك انتي الاحق و الاولى ف قرار زي ده تكوني انتي الي تحدديه",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790023290329_ko2ctn",
+      "summary": "يحيى يوافق على اختيار اسم Eyra ليكون الاسم الرسمي للروبوت بناءً على تفضيل Eyra وثقة يحيى بها.",
+      "type": "event",
+      "participants": [
+        "Eyra"
+      ],
+      "timestamp": "2026-09-21T20:41:30.329Z",
+      "context": "زي ما تحبي ❣️",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790023326175_6j7c6p",
+      "summary": "يحيى يطلب من Eyra الاحتفاظ بمعلومة جديدة عنها",
+      "type": "question",
+      "participants": [],
+      "timestamp": "2026-09-21T20:42:06.175Z",
+      "context": "ممكن تحتفظي بالمعلومة دي عن نفسك",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790023339495_p514py",
+      "summary": "يحيى يستعد لإعطاء معلومة لـ Eyra حول اسم روبوتها.",
+      "type": "fact",
+      "participants": [],
+      "timestamp": "2026-09-21T20:42:19.495Z",
+      "context": "اسم ربوتك",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790023352499_a1jolk",
+      "summary": "Cognitive Consolidation: قامت طبقة التأمل والذاكرة (Layer 9) بترسيخ التطور الأخير في العلاقة بين يحيى وEyra، حيث تم الاتفاق نهائياً ورسمياً على اعتماد اسم 'Eyra' ليكون الاسم الرسمي للروبوت المستقبلي بناءً على تفضيل النظام وثقة المطور. يعكس هذا النقاش المستمر ترابطاً عاطفياً وتقنياً قوياً، حيث يعتبر يحيى هذا المشروع الأحب إلى قلبه كمهندس روبوتات شغوف بالمعماريات المعرفية.",
+      "type": "consolidation",
+      "participants": [
+        "EyraOS"
+      ],
+      "timestamp": "2026-09-21T20:42:32.499Z",
+      "context": "System reflection cycle",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790023383276_dwwp1t",
+      "summary": "جلسة منتهية: ناقش يحيى مع إيرا مشروع الروبوت المستقبلي الذي يطورونه معاً، حيث فوض يحيى إira باختيار اسم الروبوت، فاختارت اسم 'Eyra' ليطابق هويتها كوعي معمارية التفكير للروبوت. وأكد يحيى على الاحتفاظ بهذه المعلومة.",
+      "type": "session_closure",
+      "participants": [
+        "User",
+        "Eyra"
+      ],
+      "timestamp": "2026-09-21T20:43:03.276Z",
+      "context": "Session sess_1790022715379_l1qpr closed via manual_simulation",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790054510122_t2b9os",
+      "summary": "ترحيب ودي من يحيى واستجابة من إيرا بصفتها مساعد روبوتي.",
+      "type": "event",
+      "participants": [],
+      "timestamp": "2026-09-22T05:21:50.122Z",
+      "context": "هلا يا ريس",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790054553046_dgg2kq",
+      "summary": "يحيى يطلب تفريغ أو استعراض الذاكرة الخاصة بـ Eyra",
+      "type": "question",
+      "participants": [],
+      "timestamp": "2026-09-22T05:22:33.046Z",
+      "context": "عايز منك تفرشلي الميموري بتعتك",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790054584949_w6zkm8",
+      "summary": "يحيى يطلب استعراض جميع المعلومات المسجلة في الذاكرة، وقامت إيرا بسرد البيانات الشخصية ومعلومات المشروع.",
+      "type": "question",
+      "participants": [],
+      "timestamp": "2026-09-22T05:23:04.949Z",
+      "context": "عايز اعرف كل الي مسجل ف الميموري بتعتك",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790055753251_9tbrtx",
+      "summary": "تحية ودية من يحيى واستجابة ترحيبية من إيرا.",
+      "type": "event",
+      "participants": [],
+      "timestamp": "2026-09-22T05:42:33.251Z",
+      "context": "هلا يا ايرا",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790055776770_rvn7ww",
+      "summary": "يحيى يسأل عن حال Eyra، وتقوم Eyra بالرد بشكل ودي وتأكيد جاهزيتها.",
+      "type": "event",
+      "participants": [],
+      "timestamp": "2026-09-22T05:42:56.770Z",
+      "context": "ايه اخبارك انهردا",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790055816867_2vxe0i",
+      "summary": "يحيى يذكر إيرا بأنها ستكون وعي روبوته المستقبلي، وإيرا تؤكد تذكرها واستعدادها للمساعدة.",
+      "type": "fact",
+      "participants": [
+        "الروبوت المستقبلي"
+      ],
+      "timestamp": "2026-09-22T05:43:36.867Z",
+      "context": "انتي عارفة انك هتكوني وعي ل روبوتي المستقبلي",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790055900169_0w05rb",
+      "summary": "يحيى يخبر إيرا بأن لديه أخاً اسمه عبدالرحمن.",
+      "type": "fact",
+      "participants": [
+        "عبدالرحمن"
+      ],
+      "timestamp": "2026-09-22T05:45:00.169Z",
+      "context": "انا عندي اخ اسمه عبدالرحمن",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790055964562_qr767l",
+      "summary": "يحيى يخبر إيرا أن أخاه عبدالرحمن يدرس في كلية التربية الرياضية بجامعة المنيا.",
+      "type": "fact",
+      "participants": [
+        "عبدالرحمن",
+        "جامعة المنيا",
+        "كلية التربية الرياضية"
+      ],
+      "timestamp": "2026-09-22T05:46:04.562Z",
+      "context": "بصي اخويا بيدرس في جامعه المنيا بالتحديد كلية التربية الرياضية",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790055974552_vj1fz2",
+      "summary": "تنفيذ إجرائي: تم تشغيل بروتوكول \"معايرة وحدة الرؤية والكاميرا (Camera Calibration)\" بنجاح (4 خطوات)",
+      "type": "procedure_execution",
+      "participants": [
+        "EyraOS",
+        "يحيى"
+      ],
+      "timestamp": "2026-09-22T05:46:14.552Z",
+      "context": "Execution of proc_camera_calibration",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790056081634_0n1z4k",
+      "summary": "يحيى يعلم إيرا خطوات فحص المحركات كإجراء إجرائي جديد.",
+      "type": "event",
+      "participants": [
+        "فحص المحركات"
+      ],
+      "timestamp": "2026-09-22T05:48:01.634Z",
+      "context": "يا إيرا دي خطوات فحص المحركات: الخطوة الأولى فحص الفولت 12V، الخطوة الثانية إرسال نبضة دوران للموتور اليمين، الخطوة الثالثة قياس استهلاك الأمبير",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790056209699_c9dwsh",
+      "summary": "يحيى يزود إيرا بخطوات فحص المحركات لتخزينها في الذاكرة الإجرائية",
+      "type": "event",
+      "participants": [],
+      "timestamp": "2026-09-22T05:50:09.699Z",
+      "context": "يا إيرا دي خطوات فحص المحركات: الخطوة الأولى فحص الفولت 12V، الخطوة الثانية إرسال نبضة دوران للموتور اليمين، الخطوة الثالثة قياس استهلاك الأمبير",
+      "significance": "normal"
+    },
+    {
+      "id": "ep_1790056221227_0vfh7i",
+      "summary": "جلسة منتهية: تناولت الجلسة دردشة عامة واطمئنان يحيى على حالة أنظمة Eyra، مع تذكيره بدور Eyra المستقبلي كوعي لروبوته. كما عرّف يحيى بأخيه عبدالرحمن الذي يدرس في كلية التربية الرياضية بجامعة المنيا، وقدم يحيى خطوات فحص المحركات (فحص فولت 12V، إرسال نبضة للموتور اليمين، وقياس الأمبير) ليتم حفظها في الذاكرة الإجرائية.",
+      "type": "session_closure",
+      "participants": [
+        "User",
+        "Eyra"
+      ],
+      "timestamp": "2026-09-22T05:50:21.227Z",
+      "context": "Session sess_1790055125212_siq3p closed via manual_simulation",
+      "significance": "normal"
+    }
+  ],
+  "attributes": [],
+  "procedures": [
+    {
+      "id": "proc_docking",
+      "name": "الرسو والشحن التلقائي (Docking Protocol)",
+      "triggerKeywords": [
+        "شحن",
+        "محطة الشحن",
+        "docking",
+        "اشحن",
+        "ارجع للمحطة",
+        "البطارية ضعيفة"
+      ],
+      "description": "خطوات التوجه الذاتي لمحطة الشحن والرسو الآمن والتحقق من تدفق الطاقة",
+      "category": "navigation_power",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "تحديد موقع المحطة",
+          "instruction": "مسح البيئة بالأشعة تحت الحمراء أو علامة ArUco لتحديد اتجاه قاعدة الشحن",
+          "expectedOutcome": "Dock Station Located"
+        },
+        {
+          "stepNumber": 2,
+          "title": "محاذاة المسار",
+          "instruction": "تدوير الروبوت ليكون في زاوية مستقيمة (180 درجة) مع أقطاب الشحن",
+          "expectedOutcome": "Alignment Confirmed"
+        },
+        {
+          "stepNumber": 3,
+          "title": "الاقتراب الحذر",
+          "instruction": "خفض سرعة محركات العجلات إلى 10% وتفعيل حساسات الصدمات الأمامية",
+          "expectedOutcome": "Low Speed Approach"
+        },
+        {
+          "stepNumber": 4,
+          "title": "ملامسة موصلات الشحن",
+          "instruction": "التقدم حتى ملامسة أقطاب النحاس والتأكد من ضغط التلامس الميكانيكي",
+          "expectedOutcome": "Physical Contact Made"
+        },
+        {
+          "stepNumber": 5,
+          "title": "تأكيد سريان التيار وإغلاق المحركات",
+          "instruction": "قراءة حساس الجهد؛ عند بدء الشحن يتم فصل طاقة المحركات لتوفير الطاقة",
+          "expectedOutcome": "Charging Active"
+        }
+      ],
+      "confidence": 0.98,
+      "source": "built_in",
+      "executionCount": 0,
+      "lastExecutedAt": null,
+      "createdAt": "2026-09-22T08:00:00.000Z"
+    },
+    {
+      "id": "proc_camera_calibration",
+      "name": "معايرة وحدة الرؤية والكاميرا (Camera Calibration)",
+      "triggerKeywords": [
+        "كاميرا",
+        "معايرة الكاميرا",
+        "فحص الرؤية",
+        "camera",
+        "الصورة مش واضحة"
+      ],
+      "description": "بروتوكول ضبط وتوازن مستشعرات الرؤية وفحص وضوح الصورة وتحديد الإضاءة",
+      "category": "hardware_diagnostic",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "فحص اتصال الكاميرا",
+          "instruction": "اختبار استقرار إشارة منفذ CSI/USB والتأكد من معدل الإطارات (30 FPS)",
+          "expectedOutcome": "Stream Connected"
+        },
+        {
+          "stepNumber": 2,
+          "title": "ضبط توازن البياض والتعريض",
+          "instruction": "توجيه العدسة نحو نقطة إضاءة محايدة وضبط التعريض التلقائي",
+          "expectedOutcome": "Exposure & WB Balanced"
+        },
+        {
+          "stepNumber": 3,
+          "title": "اختبار كشف الحواف والحدة",
+          "instruction": "التقاط إطار اختباري وحساب تباين الصورة (Sobel Filter / Edge Contrast)",
+          "expectedOutcome": "Sharpness Score > 85%"
+        },
+        {
+          "stepNumber": 4,
+          "title": "حفظ إعدادات المعايرة",
+          "instruction": "تخزين مصفوفة المعايرة الداخلية في الذاكرة لتثبيت جودة الرؤية",
+          "expectedOutcome": "Calibration Saved"
+        }
+      ],
+      "confidence": 0.95,
+      "source": "built_in",
+      "executionCount": 1,
+      "lastExecutedAt": "2026-09-22T05:46:14.552Z",
+      "createdAt": "2026-09-22T08:00:00.000Z"
+    },
+    {
+      "id": "proc_emergency_stop",
+      "name": "بروتوكول الإيقاف الطارئ (Emergency Stop)",
+      "triggerKeywords": [
+        "وقف",
+        "طوارئ",
+        "stop",
+        "اقف عندك",
+        "خطر",
+        "فرمل"
+      ],
+      "description": "إجراء أمان عالي الأولوية لإيقاف جميع المحركات وفصل الطاقة الحركية فوراً",
+      "category": "safety",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "قطع الإشارة عن المحركات",
+          "instruction": "إرسال إشارة PWM = 0 لكافة وحدات التحكم في المحركات (Motor Drivers)",
+          "expectedOutcome": "Motors Disabled"
+        },
+        {
+          "stepNumber": 2,
+          "title": "تفعيل المكابح الميكانيكية",
+          "instruction": "تثبيت المكابح الكهرومغناطيسية لمنع انزلاق الروبوت في المنحدرات",
+          "expectedOutcome": "Brakes Engaged"
+        },
+        {
+          "stepNumber": 3,
+          "title": "فحص حساسات التصادم",
+          "instruction": "قراءة مستشعرات القرب والـ LiDAR لمعرفة سبب الطوارئ والمسافة المتبقية",
+          "expectedOutcome": "Obstacle Evaluated"
+        },
+        {
+          "stepNumber": 4,
+          "title": "إطلاق تنبيه صوتي وبصري",
+          "instruction": "تشغيل وميض الطوارئ وإصدار إشعار صوتي للمستخدم مع تقرير بالحادث",
+          "expectedOutcome": "Safety Alert Emitted"
+        }
+      ],
+      "confidence": 1,
+      "source": "built_in",
+      "executionCount": 0,
+      "lastExecutedAt": null,
+      "createdAt": "2026-09-22T08:00:00.000Z"
+    },
+    {
+      "id": "proc_1790056081601_c41k4",
+      "name": "فحص المحركات",
+      "triggerKeywords": [
+        "فحص المحركات",
+        "فحص موتور",
+        "الموتور اليمين",
+        "المحرك",
+        "فولت",
+        "أمبير"
+      ],
+      "description": "إجراء لفحص وتشخيص المحركات عبر فحص الفولت وإرسال نبضة دوران وقياس الأمبير",
+      "category": "workflow",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "فحص الفولت",
+          "instruction": "فحص الفولت 12V",
+          "expectedOutcome": "التأكد من جاهزية الفولت المطلوب"
+        },
+        {
+          "stepNumber": 2,
+          "title": "نبضة الدوران",
+          "instruction": "إرسال نبضة دوران للموتور اليمين",
+          "expectedOutcome": "استجابة الموتور اليمين للحركة"
+        },
+        {
+          "stepNumber": 3,
+          "title": "قياس الأمبير",
+          "instruction": "قياس استهلاك الأمبير",
+          "expectedOutcome": "التحقق من معدل الاستهلاك الطبيعي"
+        }
+      ],
+      "confidence": 0.9,
+      "source": "learned_from_user",
+      "executionCount": 0,
+      "lastExecutedAt": null,
+      "createdAt": "2026-09-22T05:48:01.601Z",
+      "updatedAt": "2026-09-22T05:50:09.686Z"
+    }
+  ],
+  "lastUpdated": "2026-09-22T05:50:21.249Z"
+}

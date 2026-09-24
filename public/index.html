@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EyraOS — نظام ذاكرة ومحادثة معرفي للروبوت مع رسم بياني حي للعلاقات">
+    <title>EyraOS — الذاكرة المعرفية</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- vis.js Network for graph visualization -->
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ═══ Background Effects ═══ -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <!-- ═══ Main Container ═══ -->
+    <div class="app-container">
+        
+        <!-- ═══ Header ═══ -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo-icon">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <circle cx="14" cy="14" r="12" stroke="url(#logo-grad)" stroke-width="2"/>
+                        <circle cx="14" cy="14" r="6" fill="url(#logo-grad)" opacity="0.6"/>
+                        <circle cx="14" cy="14" r="3" fill="url(#logo-grad)"/>
+                        <defs>
+                            <linearGradient id="logo-grad" x1="0" y1="0" x2="28" y2="28">
+                                <stop offset="0%" stop-color="#06d6a0"/>
+                                <stop offset="100%" stop-color="#7c3aed"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="header-title">
+                    <h1>EyraOS</h1>
+                    <span class="header-subtitle">الذاكرة المعرفية</span>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <nav class="header-nav">
+                <button class="nav-tab active" data-view="chat" id="tabChat">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                    </svg>
+                    <span>الشات</span>
+                </button>
+                <button class="nav-tab" data-view="erd" id="tabERD">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" rx="1"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1"/>
+                        <line x1="10" y1="6.5" x2="14" y2="6.5"/>
+                        <line x1="6.5" y1="10" x2="6.5" y2="14"/>
+                        <line x1="17.5" y1="10" x2="17.5" y2="14"/>
+                    </svg>
+                    <span>ERD Schema</span>
+                </button>
+                <button class="nav-tab" data-view="layers" id="tabLayers">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                        <polyline points="2 17 12 22 22 17"/>
+                        <polyline points="2 12 12 17 22 12"/>
+                    </svg>
+                    <span>طبقات الذاكرة</span>
+                </button>
+            </nav>
+
+            <!-- Session & Working Memory Widget -->
+            <div class="session-widget" id="sessionWidget">
+                <div class="session-badge" id="sessionBadge">
+                    <span class="session-dot" id="sessionDot"></span>
+                    <span class="session-status-text" id="sessionStatusText">جلسة نشطة</span>
+                    <span class="session-timer" id="sessionTimer" title="الوقت المتبقي حتى انتهاء الجلسة وتفريغ الذاكرة العاملة">⏱️ 15:00</span>
+                    <span class="session-wm-tag" id="sessionWmTag" title="عدد الرسائل المحفوظة في الذاكرة العاملة المؤقتة">💭 0</span>
+                </div>
+                <button class="btn-timeout-sim" id="btnSimulateTimeoutHeader" title="محاكاة انقضاء مهلة عدم التفاعل (15 دقيقة) وتفعيل التأمل وتفريغ الذاكرة العاملة">
+                    <span>⚡ إنهاء وتأمل الجلسة</span>
+                </button>
+            </div>
+
+            <div class="header-right">
+                <div class="stats-bar" id="statsBar">
+                    <div class="stat-item" id="statEntities">
+                        <span class="stat-icon">◈</span>
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">كيانات</span>
+                    </div>
+                    <div class="stat-item" id="statRelations">
+                        <span class="stat-icon">⟷</span>
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">علاقات</span>
+                    </div>
+                    <div class="stat-item" id="statEpisodes">
+                        <span class="stat-icon">◉</span>
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">أحداث</span>
+                    </div>
+                </div>
+                <button class="btn-clear" id="btnClear" title="مسح الذاكرة">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- ═══ View: Chat (Split View) ═══ -->
+        <div class="main-content view-section active" id="viewChat">
+
+            <!-- ══ Left Panel: Chat ══ -->
+            <div class="panel chat-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                        </svg>
+                        <span>المحادثة</span>
+                    </div>
+                    <div class="panel-status" id="chatStatus">
+                        <span class="status-dot online"></span>
+                        <span>متصل</span>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Welcome message -->
+                    <div class="message bot-message welcome-message">
+                        <div class="message-avatar">
+                            <svg width="20" height="20" viewBox="0 0 28 28" fill="none">
+                                <circle cx="14" cy="14" r="12" stroke="url(#avatar-grad)" stroke-width="2"/>
+                                <circle cx="14" cy="14" r="5" fill="url(#avatar-grad)"/>
+                                <defs>
+                                    <linearGradient id="avatar-grad" x1="0" y1="0" x2="28" y2="28">
+                                        <stop offset="0%" stop-color="#06d6a0"/>
+                                        <stop offset="100%" stop-color="#7c3aed"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-name">Eyra</div>
+                            <div class="message-text">
+                                أهلاً! أنا <strong>Eyra</strong> — نظام ذاكرة معرفي. 
+                                كلمني عن أي حاجة وهقدر أفتكرها وأربط المعلومات ببعض. 
+                                هتشوف الـ Knowledge Graph بيتبني في الوقت الفعلي على اليسار! 🧠
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="chatInput" 
+                            placeholder="اكتب رسالتك هنا..." 
+                            rows="1"
+                            maxlength="2000"
+                        ></textarea>
+                        <button class="btn-send" id="btnSend" title="إرسال">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="input-hint">
+                        <span>Enter للإرسال • Shift+Enter لسطر جديد</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══ Resizer ══ -->
+            <div class="panel-resizer" id="panelResizer"></div>
+
+            <!-- ══ Right Panel: Knowledge Graph ══ -->
+            <div class="panel graph-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="6" cy="6" r="3"/>
+                            <circle cx="18" cy="18" r="3"/>
+                            <circle cx="18" cy="6" r="3"/>
+                            <circle cx="6" cy="18" r="3"/>
+                            <line x1="8.5" y1="7.5" x2="15.5" y2="16.5"/>
+                            <line x1="15.5" y1="7.5" x2="8.5" y2="16.5"/>
+                        </svg>
+                        <span>Knowledge Graph</span>
+                    </div>
+                    <div class="graph-controls">
+                        <button class="btn-graph-control" id="btnToggleSuperseded" title="إظهار/إخفاء العلاقات الملغاة">
+                            <span>⚡ الملغاة</span>
+                        </button>
+                        <button class="btn-graph-control" id="btnFitGraph" title="ملائمة الشاشة">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                            </svg>
+                        </button>
+                        <button class="btn-graph-control" id="btnTogglePhysics" title="تشغيل/إيقاف الفيزياء">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="12" cy="12" r="4"/>
+                                <line x1="12" y1="2" x2="12" y2="6"/>
+                                <line x1="12" y1="18" x2="12" y2="22"/>
+                                <line x1="2" y1="12" x2="6" y2="12"/>
+                                <line x1="18" y1="12" x2="22" y2="12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="graph-legend" id="graphLegend">
+                    <div class="legend-item"><span class="legend-color" style="background:#06d6a0"></span>شخص</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#3b82f6"></span>مكان</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#f59e0b"></span>طعام</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#8b5cf6"></span>مفهوم</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#ef4444"></span>تكنولوجيا</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#64748b"></span>أخرى</div>
+                    <div class="legend-item"><span class="legend-line-superseded"></span>ملغاة</div>
+                </div>
+
+                <!-- Graph Container -->
+                <div class="graph-container" id="graphContainer">
+                    <div class="graph-placeholder" id="graphPlaceholder">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                            <circle cx="25" cy="25" r="8" stroke="#06d6a0" stroke-width="2" opacity="0.5"/>
+                            <circle cx="55" cy="20" r="6" stroke="#3b82f6" stroke-width="2" opacity="0.5"/>
+                            <circle cx="40" cy="55" r="10" stroke="#8b5cf6" stroke-width="2" opacity="0.5"/>
+                            <line x1="32" y1="28" x2="50" y2="22" stroke="#4a5568" stroke-width="1" opacity="0.3"/>
+                            <line x1="28" y1="32" x2="36" y2="47" stroke="#4a5568" stroke-width="1" opacity="0.3"/>
+                            <line x1="55" y1="27" x2="46" y2="47" stroke="#4a5568" stroke-width="1" opacity="0.3"/>
+                        </svg>
+                        <p>ابدأ محادثة وشاهد الـ Knowledge Graph وهو بيتبني...</p>
+                    </div>
+                </div>
+
+                <!-- Entity Details Panel -->
+                <div class="entity-details" id="entityDetails" style="display: none;">
+                    <div class="details-header">
+                        <h3 id="detailsTitle">Entity Name</h3>
+                        <button class="btn-close-details" id="btnCloseDetails">✕</button>
+                    </div>
+                    <div class="details-body" id="detailsBody"></div>
+                    <div class="details-footer">
+                        <button class="btn-delete-entity" id="btnDeleteEntity" title="حذف هذا الكيان وجميع علاقاته نهائياً">
+                            <span>🗑️ حذف الكيان من الذاكرة</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ View: ERD Schema ═══ -->
+        <div class="view-section" id="viewERD">
+            <div class="erd-container">
+                <div class="erd-header">
+                    <h2>📊 ERD — مخطط قاعدة البيانات</h2>
+                    <p>هيكل التخزين والعلاقات بين التيبلز في نظام الذاكرة</p>
+                </div>
+                <div class="erd-canvas" id="erdCanvas">
+                    <!-- ERD Tables -->
+                    <div class="erd-tables-wrapper">
+
+                        <!-- Entities Table -->
+                        <div class="erd-table" id="erdEntities" style="--table-color: #06d6a0">
+                            <div class="erd-table-header">
+                                <span class="table-icon">◈</span>
+                                <span>entities</span>
+                                <span class="table-count" id="erdEntitiesCount">0 rows</span>
+                            </div>
+                            <div class="erd-table-body">
+                                <div class="erd-field pk"><span class="field-key">PK</span> id <span class="field-type">STRING</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> name <span class="field-type">STRING</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> type <span class="field-type">ENUM</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> attributes <span class="field-type">JSON</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> confidence <span class="field-type">FLOAT</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> source <span class="field-type">STRING</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> status <span class="field-type">ENUM</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> createdAt <span class="field-type">DATETIME</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> updatedAt <span class="field-type">DATETIME</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> accessCount <span class="field-type">INT</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Relations Table -->
+                        <div class="erd-table" id="erdRelations" style="--table-color: #7c3aed">
+                            <div class="erd-table-header">
+                                <span class="table-icon">⟷</span>
+                                <span>relations</span>
+                                <span class="table-count" id="erdRelationsCount">0 rows</span>
+                            </div>
+                            <div class="erd-table-body">
+                                <div class="erd-field pk"><span class="field-key">PK</span> id <span class="field-type">STRING</span></div>
+                                <div class="erd-field fk"><span class="field-key">FK</span> from <span class="field-type">→ entities.name</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> relation <span class="field-type">STRING</span></div>
+                                <div class="erd-field fk"><span class="field-key">FK</span> to <span class="field-type">→ entities.name</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> confidence <span class="field-type">FLOAT</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> source <span class="field-type">ENUM</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> type <span class="field-type">ENUM</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> status <span class="field-type">ENUM (active|superseded)</span></div>
+                                <div class="erd-field fk"><span class="field-key">FK</span> supersededBy <span class="field-type">→ relations.id</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> reinforcementCount <span class="field-type">INT</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> createdAt <span class="field-type">DATETIME</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Episodes Table -->
+                        <div class="erd-table" id="erdEpisodes" style="--table-color: #3b82f6">
+                            <div class="erd-table-header">
+                                <span class="table-icon">◉</span>
+                                <span>episodes</span>
+                                <span class="table-count" id="erdEpisodesCount">0 rows</span>
+                            </div>
+                            <div class="erd-table-body">
+                                <div class="erd-field pk"><span class="field-key">PK</span> id <span class="field-type">STRING</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> summary <span class="field-type">TEXT</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> type <span class="field-type">ENUM</span></div>
+                                <div class="erd-field fk"><span class="field-key">FK</span> participants <span class="field-type">→ entities[]</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> timestamp <span class="field-type">DATETIME</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> context <span class="field-type">TEXT</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> significance <span class="field-type">ENUM</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Conversation History Table -->
+                        <div class="erd-table" id="erdConversation" style="--table-color: #f59e0b">
+                            <div class="erd-table-header">
+                                <span class="table-icon">💬</span>
+                                <span>conversation_history</span>
+                                <span class="table-count">temp</span>
+                            </div>
+                            <div class="erd-table-body">
+                                <div class="erd-field"><span class="field-dot"></span> role <span class="field-type">ENUM</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> content <span class="field-type">TEXT</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Procedures Table (Layer 5: Procedural Memory) -->
+                        <div class="erd-table" id="erdProcedures" style="--table-color: #10b981">
+                            <div class="erd-table-header">
+                                <span class="table-icon">⚙️</span>
+                                <span>procedures</span>
+                                <span class="table-count" id="erdProceduresCount">3 rows</span>
+                            </div>
+                            <div class="erd-table-body">
+                                <div class="erd-field pk"><span class="field-key">PK</span> id <span class="field-type">STRING</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> name <span class="field-type">STRING</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> triggerKeywords <span class="field-type">STRING[]</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> description <span class="field-type">TEXT</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> category <span class="field-type">ENUM</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> steps <span class="field-type">STEP[] (JSON)</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> executionCount <span class="field-type">INT</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> lastExecutedAt <span class="field-type">DATETIME</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Memory Metadata Table -->
+                        <div class="erd-table" id="erdMetadata" style="--table-color: #ec4899">
+                            <div class="erd-table-header">
+                                <span class="table-icon">📋</span>
+                                <span>memory_metadata</span>
+                                <span class="table-count">system</span>
+                            </div>
+                            <div class="erd-table-body">
+                                <div class="erd-field"><span class="field-dot"></span> lastUpdated <span class="field-type">DATETIME</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> totalEntities <span class="field-type">INT</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> totalRelations <span class="field-type">INT</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> totalEpisodes <span class="field-type">INT</span></div>
+                                <div class="erd-field"><span class="field-dot"></span> entityTypes <span class="field-type">STRING[]</span></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- SVG Lines for relationships -->
+                    <svg class="erd-lines" id="erdLines"></svg>
+                </div>
+
+                <!-- ERD Legend -->
+                <div class="erd-legend">
+                    <div class="erd-legend-item"><span class="field-key">PK</span> Primary Key</div>
+                    <div class="erd-legend-item"><span class="field-key fk-key">FK</span> Foreign Key</div>
+                    <div class="erd-legend-item"><span class="erd-line-sample one-to-many"></span> One-to-Many</div>
+                    <div class="erd-legend-item"><span class="erd-line-sample many-to-many"></span> Many-to-Many</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ View: Memory Layers ═══ -->
+        <div class="view-section" id="viewLayers">
+            <div class="layers-container">
+                <div class="layers-header">
+                    <h2>🧠 معمارية الذاكرة — Memory Architecture</h2>
+                    <p>الطبقات العشر لنظام ذاكرة EyraOS وكيف بتتفاعل مع بعض</p>
+                </div>
+
+                <!-- Architecture Flow -->
+                <div class="layers-flow">
+
+                    <!-- Layer 1: Immutable Core -->
+                    <div class="memory-layer" data-layer="immutable-core">
+                        <div class="layer-badge">1</div>
+                        <div class="layer-icon">🛡️</div>
+                        <div class="layer-content">
+                            <h3>Immutable Core</h3>
+                            <p class="layer-ar">النواة الثابتة / دستور الهوية</p>
+                            <p class="layer-desc">الخصائص الأساسية للروبوت اللي مش بتتغير — الهوية، القواعد الأساسية، حدود الأمان</p>
+                            <div class="layer-tags">
+                                <span class="tag tag-readonly">Read Only</span>
+                                <span class="tag tag-protected">Protected</span>
+                            </div>
+                        </div>
+                        <div class="layer-data">
+                            <div class="data-item"><span>الاسم:</span> Eyra</div>
+                            <div class="data-item"><span>النظام:</span> EyraOS</div>
+                            <div class="data-item"><span>الغرض:</span> نظام معرفي</div>
+                        </div>
+                    </div>
+                    <div class="layer-connector">▼</div>
+
+                    <!-- Layer 2: Self Model -->
+                    <div class="memory-layer" data-layer="self-model">
+                        <div class="layer-badge">2</div>
+                        <div class="layer-icon">🤖</div>
+                        <div class="layer-content">
+                            <h3>Self Model</h3>
+                            <p class="layer-ar">نموذج الذات</p>
+                            <p class="layer-desc">معلومات الروبوت عن نفسه — القدرات، القيود، الحالة الحالية</p>
+                            <div class="layer-tags">
+                                <span class="tag tag-mutable">Mutable</span>
+                                <span class="tag tag-auto">Auto-Update</span>
+                            </div>
+                        </div>
+                        <div class="layer-data">
+                            <div class="data-item"><span>Model:</span> Gemini 3.5 Flash Lite</div>
+                            <div class="data-item"><span>Memory:</span> Active</div>
+                        </div>
+                    </div>
+                    <div class="layer-connector">▼</div>
+
+                    <!-- Layer 3: Semantic Memory -->
+                    <div class="memory-layer highlight" data-layer="semantic">
+                        <div class="layer-badge">3</div>
+                        <div class="layer-icon">📚</div>
+                        <div class="layer-content">
+                            <h3>Semantic Memory</h3>
+                            <p class="layer-ar">الذاكرة الدلالية</p>
+                            <p class="layer-desc">المعرفة العامة — حقائق، مفاهيم، كيانات، علاقات. بتستخدم Entity/Relation structure</p>
+                            <div class="layer-tags">
+                                <span class="tag tag-active">Active ✓</span>
+                                <span class="tag tag-growing">Growing</span>
+                            </div>
+                        </div>
+                        <div class="layer-data" id="layerSemanticData">
+                            <div class="data-item"><span>كيانات:</span> <b id="layerEntCount">0</b></div>
+                            <div class="data-item"><span>علاقات:</span> <b id="layerRelCount">0</b></div>
+                            <div class="data-item"><span>أنواع:</span> <b id="layerTypeCount">0</b></div>
+                        </div>
+                    </div>
+                    <div class="layer-connector">▼</div>
+
+                    <!-- Layer 4: Episodic Memory -->
+                    <div class="memory-layer highlight" data-layer="episodic">
+                        <div class="layer-badge">4</div>
+                        <div class="layer-icon">📖</div>
+                        <div class="layer-content">
+                            <h3>Episodic Memory</h3>
+                            <p class="layer-ar">ذاكرة الأحداث</p>
+                            <p class="layer-desc">الخبرات والأحداث — "إيه اللي حصل؟" — بتسجّل الأحداث بالتوقيت والسياق</p>
+                            <div class="layer-tags">
+                                <span class="tag tag-active">Active ✓</span>
+                                <span class="tag tag-temporal">Temporal</span>
+                            </div>
+                        </div>
+                        <div class="layer-data">
+                            <div class="data-item"><span>أحداث:</span> <b id="layerEpCount">0</b></div>
+                        </div>
+                    </div>
+                    <div class="layer-connector">▼</div>
+
+                    <!-- Layer 5: Procedural Memory -->
+                    <div class="memory-layer highlight" data-layer="procedural">
+                        <div class="layer-badge">5</div>
+                        <div class="layer-icon">⚙️</div>
+                        <div class="layer-content">
+                            <h3>Procedural Memory</h3>
+                            <p class="layer-ar">الذاكرة الإجرائية</p>
+                            <p class="layer-desc">معرفة "كيف تنفذ المهام" — بروتوكولات تشغيل، معايرة، سلاسل خطوات ومهام عمل مهيكلة</p>
+                            <div class="layer-tags">
+                                <span class="tag tag-active">Active ✓</span>
+                                <span class="tag tag-core">Skills & How-To</span>
+                            </div>
+                            <div class="procedures-controls" style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button class="btn-view-procedures" id="btnToggleProceduresList">
+                                    <span>📋 استعراض الإجراءات والمهارات</span>
+                                </button>
+                                <button class="btn-add-procedure" id="btnOpenAddProcModal">
+                                    <span>➕ إضافة مهارة جديدة</span>
+                                </button>
+                            </div>
+                            <div class="procedures-list-container" id="proceduresListContainer" style="display: none; margin-top: 14px;"></div>
+                        </div>
+                        <div class="layer-data">
+                            <div class="data-item"><span>مهارات مخزنة:</span> <b id="layerProcCount">0</b> إجراء</div>
+                        </div>
+                    </div>
+                    <div class="layer-connector">▼</div>
+
+                    <!-- Layer 6: Adaptive Personality -->
+                    <div class="memory-layer dim" data-layer="personality">
+                        <div class="layer-badge">6</div>
+                        <div class="layer-icon">🎭</div>
+                        <div class="layer-content">
+                            <h3>Adaptive Personality</h3>
+                            <p class="layer-ar">الشخصية المتكيّفة</p>
+                            <p class="layer-desc">معاملات شخصية بتتطور تدريجياً — الفضول، الاجتماعية، الحذر</p>
+                            <div class="layer-tags">
+                                <span class="tag tag-planned">Planned</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layer-connector">▼</div>
+
+                    <!-- Layer 7: World Model -->
+                    <div class="memory-layer dim" data-layer="world-model">
+                        <div class="layer-badge">7</div>
+                        <div class="layer-icon">🌍</div>
+                        <div class="layer-content">
+                            <h3>World Model</h3>
+                            <p class="layer-ar">نموذج العالم</p>
+                            <p class="layer-desc">فهم الروبوت للبيئة الحالية — "إيه بيحصل دلوقتي؟"</p>
+                            <div class="layer-tags">
+                                <span class="tag tag-planned">Planned</span>
+                                <span class="tag tag-realtime">Real-time</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layer-connector">▼</div>
+
+                    <!-- Layer 8: Working Memory -->
+                    <div class="memory-layer highlight" data-layer="working">
+                        <div class="layer-badge">8</div>
+                        <div class="layer-icon">💭</div>
+                        <div class="layer-content">
+                            <h3>Working Memory</h3>
+                            <p class="layer-ar">الذاكرة العاملة المؤقتة</p>
+                            <p class="layer-desc">المعلومات وسياق الجلسة الحالية — تسقط وتفرغ تلقائياً عند انقضاء الجلسة (Inactivity Timeout 15 دقيقة) وتتحول لخبرات مستخلصة في الطبقة 9 و 4</p>
+                            <div class="layer-tags">
+                                <span class="tag tag-active">Active ✓</span>
+                                <span class="tag tag-temp">Decay & Flush</span>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <button class="btn-run-consolidation" id="btnSimulateTimeoutLayers">
+                                    <span>⏱️ محاكاة انقضاء الجلسة (15 دقيقة) وتفريغ الذاكرة</span>
+                                </button>
+                            </div>
+                            <div class="consolidation-insights" id="sessionConsolidationResult" style="display: none;"></div>
+                        </div>
+                        <div class="layer-data">
+                            <div class="data-item"><span>سياق الجلسة:</span> <b id="layerCtxCount">0</b> رسالة</div>
+                            <div class="data-item"><span>الوقت المتبقي:</span> <b id="layerRemainingTime">15:00</b></div>
+                        </div>
+                    </div>
+                    <div class="layer-connector">▼</div>
+
+                    <!-- Layer 9: Reflection & Consolidation -->
+                    <div class="memory-layer highlight" data-layer="reflection">
+                        <div class="layer-badge">9</div>
+                        <div class="layer-icon">🔄</div>
+                        <div class="layer-content">
+                            <h3>Reflection & Consolidation</h3>
+                            <p class="layer-ar">التأمل وتثبيت الذاكرة</p>
+                            <p class="layer-desc">معالجة دورية للخبرات — استخلاص أنماط السلوك ودمج المفاهيم المتقاربة</p>
+                            <div class="layer-tags">
+                                <span class="tag tag-active">Active ✓</span>
+                                <span class="tag tag-core">Cognitive</span>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <button class="btn-run-consolidation" id="btnRunConsolidation">
+                                    <span>⚡ تشغيل دورة التأمل والتجميع</span>
+                                </button>
+                            </div>
+                            <div class="consolidation-insights" id="consolidationInsights" style="display: none;"></div>
+                        </div>
+                    </div>
+                    <div class="layer-connector">▼</div>
+
+                    <!-- Layer 10: Memory Manager -->
+                    <div class="memory-layer" data-layer="manager">
+                        <div class="layer-badge">10</div>
+                        <div class="layer-icon">🎛️</div>
+                        <div class="layer-content">
+                            <h3>Memory Orchestrator</h3>
+                            <p class="layer-ar">مدير الذاكرة</p>
+                            <p class="layer-desc">التحكم في الوصول للذاكرة — قرارات البحث، العمق، الثقة، التحديث</p>
+                            <div class="layer-tags">
+                                <span class="tag tag-active">Active ✓</span>
+                                <span class="tag tag-core">Core Engine</span>
+                            </div>
+                        </div>
+                        <div class="layer-data">
+                            <div class="data-item"><span>Operations:</span> create, query, search, record</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Data Flow Diagram -->
+                <div class="flow-diagram">
+                    <h3>🔄 تدفق البيانات — Data Pipeline</h3>
+                    <div class="flow-steps">
+                        <div class="flow-step"><span>💬</span> Experience</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step"><span>📖</span> Episodic</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step"><span>🔄</span> Reflection</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step"><span>🔍</span> Pattern Detection</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step"><span>✅</span> Validation</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step"><span>📚</span> Semantic Memory</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- ═══ Loading Overlay ═══ -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner">
+            <div class="spinner-ring"></div>
+            <span>Eyra بتفكر...</span>
+        </div>
+    </div>
+
+    <!-- ═══ Procedure Creation / Details Modal ═══ -->
+    <div class="modal-backdrop" id="procedureModal" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="procModalTitle">⚙️ إضافة مهارة أو إجراء جديد (Procedural Memory)</h3>
+                <button class="modal-close" id="btnCloseProcModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="procForm">
+                    <div class="form-group">
+                        <label for="procNameInput">اسم الإجراء / المهارة:</label>
+                        <input type="text" id="procNameInput" placeholder="مثال: فحص جودة الاتصال اللاسلكي" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="procKeywordsInput">الكلمات المفتاحية للتشغيل (مفصولة بفواصل):</label>
+                        <input type="text" id="procKeywordsInput" placeholder="مثال: واي فاي, شبكة, اختبار النت" />
+                    </div>
+                    <div class="form-group">
+                        <label for="procDescInput">وصف الإجراء:</label>
+                        <textarea id="procDescInput" rows="2" placeholder="ما هو الغرض من هذا الإجراء؟"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="procCategorySelect">التصنيف الإجرائي:</label>
+                        <select id="procCategorySelect">
+                            <option value="workflow">سير عمل مهام (Workflow)</option>
+                            <option value="hardware_diagnostic">فحص وتشخيص عتاد (Diagnostic)</option>
+                            <option value="navigation_power">ملاحة وطاقة (Navigation / Power)</option>
+                            <option value="safety">أمان وطوارئ (Safety)</option>
+                            <option value="general">عام (General)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>خطوات الإجراء التنفيذية:</label>
+                        <div id="procStepsContainer">
+                            <div class="step-input-row">
+                                <span class="step-num">1</span>
+                                <input type="text" class="step-title-input" placeholder="عنوان الخطوة (مثال: إرسال حزم Ping)" required />
+                                <input type="text" class="step-instruction-input" placeholder="تفاصيل التنفيذ وما يُفعل" required />
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add-step" id="btnAddStepRow">+ إضافة خطوة تالية</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" id="btnCancelProcModal">إلغاء</button>
+                        <button type="submit" class="btn-primary" id="btnSaveProcedure">💾 حفظ الإجراء في الذاكرة</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
