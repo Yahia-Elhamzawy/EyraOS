@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 210" width="100%" height="210">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="streamBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d18" />
+      <stop offset="100%" stop-color="#040711" />
+    </linearGradient>
+
+    <!-- Box Fill Gradient -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#172033" />
+      <stop offset="100%" stop-color="#0b1120" />
+    </linearGradient>
+
+    <style>
+      @keyframes dashFlow {
+        from { stroke-dashoffset: 40; }
+        to { stroke-dashoffset: 0; }
+      }
+      @keyframes pulseBorder {
+        0%, 100% { stroke-opacity: 0.4; }
+        50% { stroke-opacity: 1; }
+      }
+      .flow-arrow {
+        stroke-dasharray: 6 4;
+        animation: dashFlow 1.2s linear infinite;
+      }
+      .card-border {
+        animation: pulseBorder 3s ease-in-out infinite;
+      }
+    </style>
+  </defs>
+
+  <!-- Container Box -->
+  <rect x="1" y="1" width="878" height="208" rx="12" fill="url(#streamBg)" stroke="rgba(56, 189, 248, 0.2)" stroke-width="1.5" />
+
+  <!-- Title / Header -->
+  <text x="440" y="26" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" fill="#94a3b8" letter-spacing="1.5">
+    REAL-TIME COGNITIVE DATAFLOW // CONTINUOUS STREAM PIPELINE
+  </text>
+
+  <!-- Flow Arrows (Connecting Pipelines) -->
+  <!-- Pipeline 1 -> 2 -->
+  <path d="M 205 102 L 235 102" stroke="#06d6a0" stroke-width="2" class="flow-arrow" />
+  <polygon points="239,102 231,98 231,106" fill="#06d6a0" />
+
+  <!-- Pipeline 2 -> 3 -->
+  <path d="M 425 102 L 455 102" stroke="#38bdf8" stroke-width="2" class="flow-arrow" />
+  <polygon points="459,102 451,98 451,106" fill="#38bdf8" />
+
+  <!-- Pipeline 3 -> 4 -->
+  <path d="M 645 102 L 675 102" stroke="#f59e0b" stroke-width="2" class="flow-arrow" />
+  <polygon points="679,102 671,98 671,106" fill="#f59e0b" />
+
+  <!-- Feedback Loop: Box 4 -> Box 2 (Layer 9 Reflection) -->
+  <path d="M 770 156 L 770 178 L 330 178 L 330 156" fill="none" stroke="rgba(167, 139, 250, 0.5)" stroke-width="1.5" stroke-dasharray="6 4" class="flow-arrow" />
+  <polygon points="330,152 326,160 334,160" fill="#a78bfa" />
+  <text x="550" y="192" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#a78bfa">
+    Layer 9 Reflection Loop: Inactivity Timeout (15m) &amp; Working Memory Flush
+  </text>
+
+  <!-- ======================================================== -->
+  <!-- MODULE 1: Sensory Buffer & Working Memory Ingestion       -->
+  <!-- ======================================================== -->
+  <g transform="translate(25, 45)">
+    <rect x="0" y="0" width="180" height="110" rx="8" fill="url(#cardGrad)" stroke="#06d6a0" stroke-width="1.2" class="card-border" />
+    
+    <!-- Vector Icon: Terminal / Stream Prompt -->
+    <rect x="14" y="12" width="22" height="22" rx="4" fill="rgba(6, 214, 160, 0.15)" stroke="#06d6a0" stroke-width="1" />
+    <path d="M 19 20 L 24 23 L 19 26" fill="none" stroke="#06d6a0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <line x1="26" y1="26" x2="31" y2="26" stroke="#06d6a0" stroke-width="1.5" stroke-linecap="round" />
+
+    <text x="44" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#06d6a0">Sensory Ingestion</text>
+    <text x="44" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#94a3b8">Layers 1 &amp; 8 Buffer</text>
+
+    <line x1="12" y1="44" x2="168" y2="44" stroke="rgba(255,255,255,0.08)" />
+
+    <text x="14" y="62" font-family="ui-monospace, monospace" font-size="9.5" fill="#f1f5f9">Prompt &amp; Sensory Frame</text>
+    <text x="14" y="77" font-family="ui-monospace, monospace" font-size="8.5" fill="#94a3b8">Arabic Text Normalization</text>
+    <text x="14" y="93" font-family="ui-monospace, monospace" font-size="8.5" fill="#64748b">Working Memory Active</text>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- MODULE 2: Selective Tiered Retrieval & Graph Subgraphs    -->
+  <!-- ======================================================== -->
+  <g transform="translate(245, 45)">
+    <rect x="0" y="0" width="180" height="110" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.2" class="card-border" />
+    
+    <!-- Vector Icon: Graph Network -->
+    <rect x="14" y="12" width="22" height="22" rx="4" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8" stroke-width="1" />
+    <circle cx="21" cy="27" r="2.5" fill="#38bdf8" />
+    <circle cx="29" cy="19" r="2.5" fill="#38bdf8" />
+    <circle cx="28" cy="28" r="2.5" fill="#38bdf8" />
+    <line x1="21" y1="27" x2="29" y2="19" stroke="#38bdf8" stroke-width="1" />
+    <line x1="21" y1="27" x2="28" y2="28" stroke="#38bdf8" stroke-width="1" />
+
+    <text x="44" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#38bdf8">Tiered Retrieval</text>
+    <text x="44" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#94a3b8">Layer 3 Knowledge Graph</text>
+
+    <line x1="12" y1="44" x2="168" y2="44" stroke="rgba(255,255,255,0.08)" />
+
+    <text x="14" y="62" font-family="ui-monospace, monospace" font-size="9.5" fill="#f1f5f9">1-Hop Subgraph Traversal</text>
+    <text x="14" y="77" font-family="ui-monospace, monospace" font-size="8.5" fill="#38bdf8">Conflict &amp; Negation FSM</text>
+    <text x="14" y="93" font-family="ui-monospace, monospace" font-size="8.5" fill="#64748b">Budget Protection (~27%)</text>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- MODULE 3: Procedural Memory & Skill Execution            -->
+  <!-- ======================================================== -->
+  <g transform="translate(465, 45)">
+    <rect x="0" y="0" width="180" height="110" rx="8" fill="url(#cardGrad)" stroke="#f59e0b" stroke-width="1.2" class="card-border" />
+    
+    <!-- Vector Icon: Gear / Process -->
+    <rect x="14" y="12" width="22" height="22" rx="4" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1" />
+    <circle cx="25" cy="23" r="5" fill="none" stroke="#f59e0b" stroke-width="1.8" />
+    <line x1="25" y1="15" x2="25" y2="31" stroke="#f59e0b" stroke-width="1.5" />
+    <line x1="17" y1="23" x2="33" y2="23" stroke="#f59e0b" stroke-width="1.5" />
+
+    <text x="44" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#f59e0b">Procedural Engine</text>
+    <text x="44" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#94a3b8">Layer 5 How-To Skills</text>
+
+    <line x1="12" y1="44" x2="168" y2="44" stroke="rgba(255,255,255,0.08)" />
+
+    <text x="14" y="62" font-family="ui-monospace, monospace" font-size="9.5" fill="#f1f5f9">Multi-Step Protocols</text>
+    <text x="14" y="77" font-family="ui-monospace, monospace" font-size="8.5" fill="#f59e0b">Live In-Chat Extraction</text>
+    <text x="14" y="93" font-family="ui-monospace, monospace" font-size="8.5" fill="#64748b">Interactive Stepper</text>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- MODULE 4: Episodic Logging & Actuator Output             -->
+  <!-- ======================================================== -->
+  <g transform="translate(685, 45)">
+    <rect x="0" y="0" width="170" height="110" rx="8" fill="url(#cardGrad)" stroke="#ec4899" stroke-width="1.2" class="card-border" />
+    
+    <!-- Vector Icon: Chip / Actuator -->
+    <rect x="14" y="12" width="22" height="22" rx="4" fill="rgba(236, 72, 153, 0.15)" stroke="#ec4899" stroke-width="1" />
+    <rect x="19" y="17" width="12" height="12" rx="2" fill="none" stroke="#ec4899" stroke-width="1.2" />
+    <line x1="25" y1="14" x2="25" y2="17" stroke="#ec4899" stroke-width="1.2" />
+    <line x1="25" y1="29" x2="25" y2="32" stroke="#ec4899" stroke-width="1.2" />
+    <line x1="16" y1="23" x2="19" y2="23" stroke="#ec4899" stroke-width="1.2" />
+    <line x1="31" y1="23" x2="34" y2="23" stroke="#ec4899" stroke-width="1.2" />
+
+    <text x="44" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#ec4899">Episodic Output</text>
+    <text x="44" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#94a3b8">Layer 4 &amp; ROS 2 Bridge</text>
+
+    <line x1="12" y1="44" x2="158" y2="44" stroke="rgba(255,255,255,0.08)" />
+
+    <text x="14" y="62" font-family="ui-monospace, monospace" font-size="9.5" fill="#f1f5f9">Actionable Checklist</text>
+    <text x="14" y="77" font-family="ui-monospace, monospace" font-size="8.5" fill="#ec4899">Episodic Event Logged</text>
+    <text x="14" y="93" font-family="ui-monospace, monospace" font-size="8.5" fill="#64748b">Actuator Commands</text>
+  </g>
+</svg>

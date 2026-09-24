@@ -3,27 +3,29 @@
 </p>
 
 <p align="center">
-  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-18%2B-green.svg?style=for-the-badge&logo=node.js" alt="Node.js" /></a>
-  <a href="https://ai.google.dev/"><img src="https://img.shields.io/badge/Google-Gemini%203.5%20Flash%20Lite-4285F4.svg?style=for-the-badge&logo=google" alt="Google Gemini" /></a>
-  <a href="https://visjs.org/"><img src="https://img.shields.io/badge/vis.js-Knowledge%20Graph-orange.svg?style=for-the-badge" alt="vis.js" /></a>
-  <a href="https://www.ros.org/"><img src="https://img.shields.io/badge/ROS%202-Ready-22314E.svg?style=for-the-badge&logo=ros" alt="ROS 2" /></a>
-  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License: MIT" /></a>
+  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-18%2B-22c55e.svg?style=flat-square&logo=node.js&logoColor=white" alt="Node.js" /></a>
+  <a href="https://ai.google.dev/"><img src="https://img.shields.io/badge/Model-Gemini%203.5%20Flash%20Lite-3b82f6.svg?style=flat-square&logo=google&logoColor=white" alt="Google Gemini" /></a>
+  <a href="https://visjs.org/"><img src="https://img.shields.io/badge/Graph%20Engine-vis.js-f59e0b.svg?style=flat-square" alt="vis.js" /></a>
+  <a href="https://www.ros.org/"><img src="https://img.shields.io/badge/Robotics-ROS%202%20Ready-6366f1.svg?style=flat-square&logo=ros&logoColor=white" alt="ROS 2" /></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-gray.svg?style=flat-square" alt="License: MIT" /></a>
 </p>
 
 ---
 
-## 🌟 Overview / نظرة عامة
+## Executive Summary
 
-**EyraOS** is an autonomous cognitive memory architecture designed for intelligent robotics. Unlike traditional conversational agents that dump entire message logs into a static context window, EyraOS separates **persistent knowledge** from **ephemeral context**:
+**EyraOS** is an autonomous cognitive memory architecture engineered for intelligent robotics and continuous agents. Traditional conversational systems load static, uncurated chat logs into large language model context windows, resulting in latency degradation, hallucination loops, and severe token budget exhaustion.
 
-> **"Memory is persistent knowledge. Context is a temporary selection of relevant memory."**  
-> *(الذاكرة معارف مستقرة دائمة... بينما السياق هو نافذة اختيار مؤقتة).*
+EyraOS decouples persistent knowledge from immediate conversational context based on the foundational thesis:
 
-EyraOS enables robots to continuously learn, resolve contradictions, acquire procedural skills, and consolidate experiences without cognitive degradation, hallucinations, or unbounded token consumption.
+> **Memory is persistent knowledge. Context is a temporary selection of relevant memory.**  
+> *(الذاكرة معارف مستقرة دائمة... بينما السياق هو نافذة اختيار مؤقتة)*
+
+The system maintains a multi-tiered memory hierarchy capable of graph-based knowledge traversal, real-time contradiction resolution, dynamic Arabic belief revocation, procedural skill acquisition, and scheduled memory consolidation.
 
 ---
 
-## 🌊 Real-Time Cognitive Dataflow / تدفق المعالجة الإدراكية
+## Real-Time Cognitive Dataflow
 
 <p align="center">
   <img src="./assets/cognitive-stream.svg" alt="Real-Time Cognitive Stream" width="100%" />
@@ -31,62 +33,159 @@ EyraOS enables robots to continuously learn, resolve contradictions, acquire pro
 
 ---
 
-## 🏛️ The 9 Cognitive Memory Layers / طبقات الذاكرة التسع
+## Cognitive Memory Architecture (9-Layer Hierarchy)
+
+The memory system is structured into nine distinct, specialized tiers. Each tier possesses its own lifecycle, access policies, and update mechanics:
+
+| Tier | Layer Name | Arabic Designation | Lifecycle & Update Mechanics | Runtime Status |
+|:---:|:---|:---|:---|:---:|
+| **L1** | **Sensory Buffer** | المخزن الحسي | Transitory high-frequency input buffer for LiDAR, vision, and audio streams; processed and flushed in real-time. | `Standby (Hardware Ready)` |
+| **L2** | **Short-Term Memory** | الذاكرة قصيرة المدى | Transient conversational attention window covering the latest interactive turns. | `Active` |
+| **L3** | **Semantic Memory** | الذاكرة الدلالية | Heterogeneous Knowledge Graph storing typed entities and directional relationships. Employs 1-hop subgraph retrieval. | `Active (Growing)` |
+| **L4** | **Episodic Memory** | الذاكرة العرضية | Chronological episodic log capturing interactions, participant lists, and operational outcomes. | `Active` |
+| **L5** | **Procedural Memory** | الذاكرة الإجرائية | Structured How-To skill engine storing executable multi-step protocols (docking, calibration, safety). | `Active (Interactive)` |
+| **L6** | **Adaptive Personality** | الشخصية المتكيفة | Parametric behavioral profile (curiosity, caution, sociability) tuned through ongoing user interactions. | `Planned` |
+| **L7** | **World Model** | نموذج العالم | Spatial and environmental state tracker reflecting battery levels, obstacle maps, and hardware telemetry. | `Planned (Real-Time)` |
+| **L8** | **Working Memory** | الذاكرة العاملة | Active session buffer with a 15-minute inactivity decay timer. Automatically flushed post-session. | `Active (Decay & Flush)` |
+| **L9** | **Reflection Engine** | التأمل والتجميع | Autonomous consolidation loop that synthesizes high-level behavioral inferences and resolves redundancies. | `Active (Periodic)` |
 
 ```mermaid
 graph TD
-    L1[Layer 1: Sensory Buffer - المخزن الحسي] --> L2[Layer 2: Short-Term Memory - الذاكرة اللحظية]
-    L2 --> L8[Layer 8: Working Memory - سياق الجلسة النشط]
-    L8 -->|Inactivity Timeout 15m & Flush| L9[Layer 9: Reflection & Consolidation - التأمل والتجميع]
-    L9 --> L3[Layer 3: Semantic Memory - رسم بياني للمعرفة Knowledge Graph]
-    L9 --> L4[Layer 4: Episodic Memory - سجل الأحداث والخبرات]
-    L5[Layer 5: Procedural Memory - المهارات وسلاسل المهام How-To] --> L4
-    L6[Layer 6: Adaptive Personality - الشخصية المتكيفة]
-    L7[Layer 7: World Model - نموذج العالم والحالة الراهنة]
+    L1["Layer 1: Sensory Buffer (Hardware Telemetry)"] --> L2["Layer 2: Short-Term Memory"]
+    L2 --> L8["Layer 8: Working Memory (Session Buffer)"]
+    L8 -->|"Inactivity Timeout (15m) & Flush"| L9["Layer 9: Reflection & Consolidation"]
+    L9 --> L3["Layer 3: Semantic Knowledge Graph"]
+    L9 --> L4["Layer 4: Episodic Event Log"]
+    L5["Layer 5: Procedural Memory (Skills & Protocols)"] --> L4
+    L6["Layer 6: Adaptive Personality"]
+    L7["Layer 7: World Model & Environment"]
 ```
 
-1. **Layer 1: Sensory Buffer (المخزن الحسي):** Transitory buffer for real-time sensor streams (Vision/LiDAR/IMU).
-2. **Layer 2: Short-Term Memory (الذاكرة قصيرة المدى):** Real-time conversational attention window.
-3. **Layer 3: Semantic Memory (الذاكرة الدلالية):** Dynamic Knowledge Graph of typed entities and relations.
-4. **Layer 4: Episodic Memory (الذاكرة العرضية):** Timestamped experiential episodes and interactions.
-5. **Layer 5: Procedural Memory (الذاكرة الإجرائية):** Structured How-To skills, operational protocols, and step sequences.
-6. **Layer 6: Adaptive Personality (الشخصية المتكيفة):** Evolving behavioral traits (Curiosity, Sociability, Caution).
-7. **Layer 7: World Model (نموذج العالم):** Environmental awareness, battery state, and spatial presence.
-8. **Layer 8: Working Memory (الذاكرة العاملة):** Active session buffer that decays and flushes after 15 minutes of inactivity.
-9. **Layer 9: Reflection & Consolidation (التأمل وتثبيت المعرفة):** Offline high-level reasoning, pattern extraction, and entity deduplication.
+---
+
+## Core Algorithmic Framework
+
+### 1. Selective Tiered Subgraph Retrieval
+Rather than injecting the full knowledge base into the LLM prompt, EyraOS parses the incoming Arabic natural language prompt, extracts core semantic anchors, and performs a **1-hop graph traversal**. Only relevant subgraphs and active edges are supplied to Gemini 3.5 Flash Lite:
+
+```text
+Prompt Input -> Semantic Token Extraction -> 1-Hop Graph Traversal -> Subgraph Context Injection
+```
+- **Telemetry:** Each turn outputs contextual efficiency stats (e.g., `4/15 entities retrieved (27% budget)`).
+- **Benefit:** Eliminates context distraction, guarantees bounded latency, and drastically lowers token costs.
+
+### 2. Contradiction & Belief Lifecycle FSM
+Knowledge is not immutable. When mutually exclusive relationships (such as `lives_in`, `works_as`, or `status_is`) receive conflicting updates, EyraOS triggers a deterministic Finite State Machine:
+- The previous edge is flagged as `status: "superseded"` with a timestamp (`supersededAt`).
+- The newly confirmed edge is instantiated as `status: "active"`.
+- Historical beliefs remain queryable via audit flags without polluting real-time reasoning.
+
+### 3. Explicit Arabic Negation & Belief Revocation
+Conventional LLM agents struggle with temporal negations (e.g., *"أنا مبقتش عايش في إسكندرية"*), often creating spurious negative nodes like `does_not_live_in`. EyraOS incorporates explicit revocation handlers:
+- Detects Arabic negative modifiers (`مبقتش`, `مش عايش`, `تركت`).
+- Transitions existing positive edges directly to `superseded`.
+- Prevents graph pollution and preserves topological integrity.
+
+### 4. Dual-Stream Architecture & 15-Minute Working Memory Decay
+- **Online Fast-Stream:** Extracts verified atomic facts immediately during live conversation for instantaneous graph updates.
+- **Working Memory Buffer:** Holds conversational context during active sessions. Every interaction resets a 15-minute inactivity countdown.
+- **Offline Slow Consolidation:** Upon timeout expiration, EyraOS executes an autonomous reflection pass, extracts macro-level behavioral inferences, archives an Episodic summary, and executes a **Working Memory Flush** to reset context overhead.
+
+### 5. Procedural Memory & Skill Stepper (Layer 5)
+Procedural knowledge cannot be reduced to simple declarative triplets. EyraOS models skills as ordered operational sequences:
+- **In-Chat Skill Acquisition:** Users can teach multi-step procedures directly via natural dialogue. The engine extracts triggers, categories, and numbered steps.
+- **Execution & Episodic Verification:** Procedures can be triggered programmatically or via chat commands. Each execution logs an Episode in Layer 4 and increments execution counters.
 
 ---
 
-## ⚡ Core Algorithmic Innovations / المحركات الابتكارية
+## REST API Specification
 
-### 1. Selective Tiered Retrieval (الاسترجاع الانتقائي الذكي)
-Rather than loading the entire knowledge base into the LLM context, EyraOS parses Arabic queries, locates matching nodes, and performs **1-hop graph traversal**. Only relevant sub-graphs are supplied to Gemini 3.5 Flash Lite, slashing latency and eliminating context distraction:
-> `🎯 استرجاع ذكي: 4/15 كيان (27%)`
+All endpoints communicate via JSON over HTTP.
 
-### 2. Contradiction & Lifecycle Engine (محرك فض النزاعات)
-Exclusive 1-to-1 relationships (such as `lives_in`, `works_as`, `status_is`) automatically transition older conflicting facts into a `superseded` state upon receiving new data. The system preserves cognitive history rather than blindly overriding or hallucinating contradictory facts.
+### Conversational & Memory Core
 
-### 3. Explicit Arabic Negation & Belief Revocation (إلغاء القناعات الصريح)
-Phrases like *"أنا مبقتش عايش في إسكندرية"* are detected as **revocations**. The previous relationship is archived as `superseded` without polluting the graph with negative dummy nodes (`does_not_live_in`).
+```http
+POST /api/chat
+Content-Type: application/json
 
-### 4. Dual-Stream Architecture & Session Lifecycle (المسار المزدوج)
-- **Online Fast-Stream:** Fast extraction of primary entities and direct interaction.
-- **Working Memory Buffer:** Tracks active dialog context with a 15-minute inactivity timer.
-- **Offline Slow Consolidation:** Automatically triggers upon session expiration, summarizing the session into Episodic memory, deducing behavioral patterns, and **flushing working memory** to clear cognitive overhead.
+{
+  "message": "يا إيرا دي خطوات فحص المحركات: 1. قياس الجهد 2. فحص الدوران"
+}
+```
 
-### 5. Procedural Memory & Live Skill Learning (الذاكرة الإجرائية)
-- **Dynamic In-Chat Learning:** Users can teach Eyra multi-step skills (e.g. motor diagnostics, calibration) directly in Arabic. Eyra parses the steps, saves the procedure, and renders an interactive checklist.
-- **Execution Engine:** Simulates step-by-step procedure execution, logs the outcome to Episodic Memory (Layer 4), and updates execution statistics.
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "reply": "تم تسجيل خطوات فحص المحركات بنجاح وحفظها في الذاكرة الإجرائية.",
+  "extractedEntities": [...],
+  "extractedRelations": [...],
+  "learnedProcedure": {
+    "name": "فحص المحركات",
+    "category": "hardware_diagnostic",
+    "steps": [
+      { "stepNumber": 1, "title": "قياس الجهد", "instruction": "..." },
+      { "stepNumber": 2, "title": "فحص الدوران", "instruction": "..." }
+    ]
+  },
+  "retrievalStats": {
+    "retrievedEntitiesCount": 3,
+    "totalActiveEntities": 15,
+    "retrievalPercentage": 20
+  },
+  "session": { "workingMemoryCount": 1, "remainingSeconds": 900 }
+}
+```
+
+### Knowledge Graph & Procedures Endpoints
+
+| Method | Endpoint | Description |
+|:---|:---|:---|
+| `GET` | `/api/memory/graph` | Returns all active and superseded graph nodes and edges. |
+| `GET` | `/api/memory/stats` | Aggregated metrics across entities, relations, episodes, and procedures. |
+| `DELETE` | `/api/memory/entity/:name` | Cascading deletion of an entity and its associated edges. |
+| `DELETE` | `/api/memory/relation/:id` | Deletion of a specific relational edge by ID. |
+| `GET` | `/api/memory/procedures` | Lists all stored Layer 5 procedural protocols and execution counts. |
+| `POST` | `/api/memory/procedure` | Manually registers a new procedural skill with custom steps. |
+| `POST` | `/api/memory/procedure/:id/execute` | Executes a procedure, logs an episode, and increments counters. |
+| `DELETE` | `/api/memory/procedure/:id` | Removes a procedure from Layer 5. |
+| `GET` | `/api/session` | Inspects active session status, remaining TTL, and message counts. |
+| `POST` | `/api/session/timeout` | Manually triggers 15-minute session expiration and memory flush. |
+| `POST` | `/api/memory/consolidate` | Triggers Layer 9 cognitive reflection and deduplication cycle. |
 
 ---
 
-## 🚀 Quick Start / دليل البدء والتشغيل
+## Hardware & Robotics Integration Pipeline
+
+EyraOS is architected for direct integration with physical robotic platforms:
+
+```text
+[EyraOS Layer 5 Engine]
+         |
+         v
+[ROS 2 Action Client Bridge]
+         |
+    +----+----+
+    |         |
+    v         v
+ [Nav2]   [ros2_control]
+(Waypoints)  (Actuators)
+```
+
+1. **ROS 2 Action Client Bridge:** Translates Layer 5 procedural steps into `Nav2` navigation goals and `ros2_control` hardware instructions.
+2. **Sensory Buffer Feed:** Ingests point-cloud frames and depth streams from Intel RealSense or LiDAR into Layer 1 to maintain real-time World Model state.
+3. **Edge Deployment:** Designed to run in tandem with quantized local SLMs (e.g., Gemma 2, Llama 3) on embedded compute platforms (NVIDIA Jetson Orin) for network-independent autonomy.
+
+---
+
+## Installation & Setup
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) v18.0.0 or higher
-- Google Gemini API Key ([Get one here](https://aistudio.google.com/))
+- Node.js (v18.0.0 or higher)
+- Google Gemini API Key
 
-### Installation
+### Step-by-Step Instructions
 
 1. **Clone the repository:**
    ```bash
@@ -94,7 +193,7 @@ Phrases like *"أنا مبقتش عايش في إسكندرية"* are detected a
    cd EyraOS
    ```
 
-2. **Install dependencies:**
+2. **Install project dependencies:**
    ```bash
    npm install
    ```
@@ -103,60 +202,29 @@ Phrases like *"أنا مبقتش عايش في إسكندرية"* are detected a
    ```bash
    cp .env.example .env
    ```
-   Open `.env` and set your `GEMINI_API_KEY`:
+   Edit `.env` to supply your private Gemini API key:
    ```env
-   GEMINI_API_KEY=your_actual_gemini_api_key_here
+   GEMINI_API_KEY=your_gemini_api_key_here
    PORT=3000
    ```
 
-4. **Start the server:**
+4. **Launch the cognitive kernel:**
    ```bash
    npm start
    ```
 
-5. **Open the interactive dashboard:**
-   Navigate to [http://localhost:3000](http://localhost:3000) in your web browser.
+5. **Access the user interface:**
+   Open [http://localhost:3000](http://localhost:3000) in any modern web browser.
 
 ---
 
-## 📡 REST API Reference / مرجع واجهات البرمجة
+## Repository Documentation References
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `/api/chat` | Send user message, execute tiered retrieval, and update graph |
-| `GET` | `/api/memory/graph` | Fetch complete knowledge graph (active & superseded) |
-| `GET` | `/api/memory/stats` | Retrieve real-time memory statistics across all layers |
-| `DELETE` | `/api/memory/entity/:name` | Delete a specific entity and all its relations |
-| `DELETE` | `/api/memory/relation/:id` | Delete an individual relationship |
-| `GET` | `/api/memory/procedures` | List all stored procedural skills and how-to protocols |
-| `POST` | `/api/memory/procedure` | Add a new procedural skill with custom execution steps |
-| `POST` | `/api/memory/procedure/:id/execute` | Execute and log a procedure into Episodic Memory |
-| `DELETE` | `/api/memory/procedure/:id` | Delete a procedure from Layer 5 |
-| `GET` | `/api/session` | Fetch active session state and working memory countdown |
-| `POST` | `/api/session/timeout` | Trigger manual session consolidation and memory flush |
-| `POST` | `/api/memory/consolidate` | Manually run Layer 9 cognitive reflection cycle |
+- [doc.md](doc.md) — Foundational Memory Architecture Specification.
+- [documentation.md](documentation.md) — Comprehensive Engineering Manual (Arabic/English).
 
 ---
 
-## 🤖 Hardware & Robotics Roadmap / خارطة الانتقال للروبوت الفعلي
-
-EyraOS is built from the ground up for embodiment on physical robots:
-- **ROS 2 Action Client Bridge:** Mapping Layer 5 procedural steps directly to `Nav2` navigation goals and `ros2_control` actuators.
-- **Sensory Buffer Integration:** Ingesting 3D point clouds and depth streams from Intel RealSense / LiDAR into Layer 1.
-- **Edge Deployment:** Running quantized local SLMs (e.g. Gemma 2 / Llama 3) on NVIDIA Jetson Orin for offline autonomy.
-
----
-
-## 📄 Documentation / التوثيق الإضافي
-
-For comprehensive architectural design papers and detailed implementation notes, refer to:
-- 📖 [doc.md](doc.md) — The Foundation Architecture Specification.
-- 📋 [documentation.md](documentation.md) — Comprehensive Reference Manual (Arabic/English).
-
----
-
-## 🛡️ License
+## License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
-
-Developed with ❤️ for the future of Autonomous Robotic Intelligence.
