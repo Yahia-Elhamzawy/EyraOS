@@ -2,7 +2,7 @@ import { query } from '../db/connection';
 import { Session } from '../types/memory.types';
 import { MemoryEngine } from './memory.engine';
 
-const SESSION_TIMEOUT_MS = 10 * 60 * 1000; // 10 minutes
+const SESSION_TIMEOUT_MS = 15 * 60 * 1000; // 15 minutes
 
 export class SessionManager {
     private static currentSession: Session | null = null;
@@ -36,6 +36,9 @@ export class SessionManager {
     }
 
     static isExpired(session: Session): boolean {
+        if (!session.turns || session.turns.length === 0) {
+            return false;
+        }
         const last = new Date(session.last_activity).getTime();
         return Date.now() - last > SESSION_TIMEOUT_MS;
     }

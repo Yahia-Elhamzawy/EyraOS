@@ -130,16 +130,22 @@ chatRouter.post('/chat', async (req: Request, res: Response) => {
 chatRouter.get('/session', async (req: Request, res: Response) => {
     try {
         const session = await SessionManager.getActiveSession();
-        const elapsed = Date.now() - new Date(session.last_activity).getTime();
-        const remainingMs = Math.max(0, 10 * 60 * 1000 - elapsed);
+        const turnsCount = (session.turns || []).length;
+        const SESSION_TIMEOUT_SEC = 15 * 60; // 15 minutes
+
+        let remainingSeconds = SESSION_TIMEOUT_SEC;
+        if (turnsCount > 0) {
+            const elapsedMs = Date.now() - new Date(session.last_activity).getTime();
+            remainingSeconds = Math.max(0, SESSION_TIMEOUT_SEC - Math.floor(elapsedMs / 1000));
+        }
 
         res.json({
             sessionId: session.id,
             status: session.status,
             startedAt: session.started_at,
             lastActivity: session.last_activity,
-            workingMemoryCount: (session.turns || []).length,
-            remainingSeconds: Math.floor(remainingMs / 1000)
+            workingMemoryCount: turnsCount,
+            remainingSeconds
         });
     } catch (err: any) {
         res.status(500).json({ error: err.message });
